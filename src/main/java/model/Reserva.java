@@ -32,7 +32,7 @@ public class Reserva implements Serializable {
     private double valorDiaria;
     @Column
     private double valorTotalDiaria;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn
     private Cliente cliente;
 

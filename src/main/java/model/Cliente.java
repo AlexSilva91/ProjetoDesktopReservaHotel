@@ -46,6 +46,12 @@ public class Cliente implements Serializable {
         this.email = email;
         this.telefone = telefone;
     }
+    public Cliente(int cpf, String nome, String email, String telefone) {
+        this.cpf = cpf;
+        this.nome = nome;
+        this.email = email;
+        this.telefone = telefone;
+    }
 
     public Cliente() {
 
