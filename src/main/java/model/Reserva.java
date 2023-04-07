@@ -7,6 +7,7 @@ package main.java.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import javax.persistence.*;
 
 /**
@@ -23,7 +24,7 @@ public class Reserva implements Serializable {
     @Column
     private LocalDate dataInicial;
     @Column
-    private LocalDate horaEntrada;
+    private LocalTime horaEntrada;
     @Column
     private String duracao;
     @Column
@@ -32,14 +33,14 @@ public class Reserva implements Serializable {
     private double valorDiaria;
     @Column
     private double valorTotalDiaria;
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn
     private Cliente cliente;
 
     public Reserva() {
     }
 
-    public Reserva(LocalDate dataInicial, LocalDate horaEntrada, String status, String duracao, Cliente cliente) {
+    public Reserva(LocalDate dataInicial, LocalTime horaEntrada, String status, String duracao, Cliente cliente) {
         this.dataInicial = dataInicial;
         this.horaEntrada = horaEntrada;
         this.status = status;
@@ -55,6 +56,14 @@ public class Reserva implements Serializable {
         this.id = id;
     }
 
+    public String getDuracao() {
+        return duracao;
+    }
+
+    public void setDuracao(String duracao) {
+        this.duracao = duracao;
+    }
+
     public LocalDate getDataInicial() {
         return dataInicial;
     }
@@ -63,11 +72,11 @@ public class Reserva implements Serializable {
         this.dataInicial = dataInicial;
     }
 
-    public LocalDate getHoraEntrada() {
+    public LocalTime getHoraEntrada() {
         return horaEntrada;
     }
 
-    public void setHoraEntrada(LocalDate horaEntrada) {
+    public void setHoraEntrada(LocalTime horaEntrada) {
         this.horaEntrada = horaEntrada;
     }
 

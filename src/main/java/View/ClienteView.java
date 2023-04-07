@@ -18,7 +18,7 @@ public class ClienteView extends javax.swing.JFrame {
 
     private static Cliente cliente = new Cliente();
     private static final ClienteDao clienteDao = new ClienteDao();
-    private final SolicitaReserva reserva = new SolicitaReserva(new JFrame(), true);
+    private final SolicitaReserva reserv = new SolicitaReserva(new JFrame(), true);
     private final EditarPerfil perfil = new EditarPerfil();
     private int id;
 
@@ -167,7 +167,13 @@ public class ClienteView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        System.out.println("++++++++++");
+        exibe();
+        System.out.println("----------");
+        SolicitaReserva reserva = new SolicitaReserva(new JFrame(), true);
+        reserva.cpf(cliente.getCpf());
         reserva.setVisible(true);
+        System.out.println(cliente.getCpf());
 
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 

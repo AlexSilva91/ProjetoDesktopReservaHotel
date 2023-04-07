@@ -65,11 +65,6 @@ public class EditarPerfil extends javax.swing.JFrame {
         EditarPerfil.c = c;
     }
 
-    /*public void setText() {
-        txtNome.setText(getC().getNome());
-        txtEmail.setText(getC().getEmail());
-        txtTelefone.setText(getC().getTelefone());
-    }*/
     public void PasClient(Cliente cliente) {
         setC(cliente);
         txtNome.setText(getC().getNome());

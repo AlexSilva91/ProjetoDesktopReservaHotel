@@ -7,9 +7,7 @@ package testes;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import javax.persistence.EntityManager;
-import main.java.ConnectionFactory.ConnectionFactory;
-import main.java.DAO.ClienteDao;
+import main.java.Controller.ClienteController;
 import main.java.model.Cliente;
 import main.java.model.Reserva;
 
@@ -17,29 +15,25 @@ import main.java.model.Reserva;
  *
  * @author HP - 4300
  */
-public class TesteAtualizaCliente {
+public class TesteController {
 
     public static void main(String[] args) {
-        EntityManager em = ConnectionFactory.getConnection();
-        Cliente cliente = new Cliente();
-        ClienteDao clienteDao = new ClienteDao();
+        ClienteController clienteController = new ClienteController();
         Reserva reserva = new Reserva();
-
+        Cliente cliente = new Cliente();
         try {
-            cliente = clienteDao.findById(679);
-            em.detach(cliente);
+            cliente = clienteController.Consulta(679);
             reserva.setDataInicial(LocalDate.now());
             reserva.setHoraEntrada(LocalTime.now());
             reserva.setStatus("aprovada");
-            reserva.setDuracao("2 Dias");
+            reserva.setDuracao("5 Dias");
             reserva.setValorTotalDiaria(40);
             reserva.setValorDiaria(40);
             reserva.setCliente(cliente);
             cliente.setReserva(reserva);
-            clienteDao.AtualizaCliente(cliente);
+            clienteController.ClienteReserva(cliente.getCpf(), reserva);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
-
 }

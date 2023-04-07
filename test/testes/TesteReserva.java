@@ -5,16 +5,13 @@
  */
 package testes;
 
-import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.util.Date;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 import main.java.ConnectionFactory.ConnectionFactory;
 import main.java.DAO.ReservaDao;
 import main.java.model.Cliente;
 import main.java.model.Reserva;
+import main.java.resources.conversor.Conversor;
 
 /**
  *
@@ -26,18 +23,17 @@ public class TesteReserva {
         EntityManager em = ConnectionFactory.getConnection();
         ReservaDao reservaDao = new ReservaDao();
 
-        String hora = new SimpleDateFormat("HH:mm").format(Date.from(Instant.now()));
-        String data = new SimpleDateFormat("dd/MM/yyyy").format(Date.from(Instant.now()));
         try {
             Reserva reserva = new Reserva();
             reserva.setStatus("Pendente");
-            reserva.setDataInicial(LocalDate.now());
-            reserva.setHoraEntrada(LocalDate.now());
+            reserva.setDataInicial(Conversor.ConversorData("21/05/2040"));
+            reserva.setHoraEntrada(Conversor.ConversorHora("14:30"));
             reserva.setValorDiaria(50);
             reserva.setValorTotalDiaria(50);
+            reserva.setDuracao("2 Dias");
             Cliente cliente = new Cliente();
-            cliente = new Cliente(12, "Joana", "joana9164@gmail.com", "981469865", reserva);
-            
+            cliente = new Cliente(120, "Joana", "joana9164@gmail.com", "981469865", reserva);
+
             reserva.setCliente(cliente);
             reservaDao.SaveReserva(reserva);
         } catch (PersistenceException e) {

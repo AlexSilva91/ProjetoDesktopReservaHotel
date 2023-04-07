@@ -5,20 +5,18 @@
  */
 package testes;
 
-import java.time.LocalDate;
 import main.java.resources.conversor.Conversor;
-
 
 /**
  *
  * @author HP - 4300
  */
-public class TesteFormtData {
+public class TestConversor {
+
     public static void main(String[] args) {
         
-        String data = "2023/03/27";
-        LocalDate cd = new Conversor().ConversorData(data);
-        System.out.println(cd);
-       
+        System.out.println(Conversor.ConversorData("25/06/2016"));
+        System.out.println(Conversor.ConversorHora("12:50"));
     }
+
 }

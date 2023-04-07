@@ -13,7 +13,9 @@ import main.java.View.CadastroCliente;
 import main.java.View.ClienteView;
 import main.java.View.DeletarPerfil;
 import main.java.View.EditarPerfil;
+import main.java.View.SolicitaReserva;
 import main.java.model.Cliente;
+import main.java.model.Reserva;
 
 /**
  *
@@ -28,6 +30,7 @@ public class ClienteController {
     private final ClienteView clienteView = new ClienteView();
     private final DeletarPerfil deletarPerfil = new DeletarPerfil();
     private final CadastroCliente cadastroCliente = null;
+    private final SolicitaReserva solicitaReserva = null;
     private static int cpf;
 
     public void CadastrarCliente(Cliente c) {
@@ -40,7 +43,7 @@ public class ClienteController {
                 JOptionPane.showMessageDialog(null, "Cpf já cadastrado!");
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro! Dados inválidos!\n"+e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro! Dados inválidos!\n" + e.getMessage());
         }
     }
 
@@ -82,6 +85,18 @@ public class ClienteController {
             this.deletarPerfil.fecha();
         } catch (Exception e) {
             this.deletarPerfil.Erro(e);
+        }
+    }
+
+    public void ClienteReserva(int cpf, Reserva r) {
+        try {
+            cliente = Consulta(cpf);
+            em.detach(cliente);
+            cliente.setReserva(r);
+            clienteDao.AtualizaCliente(cliente);
+            JOptionPane.showMessageDialog(null, "Reserva solicitada!");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro! " +e);
         }
     }
 

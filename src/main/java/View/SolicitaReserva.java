@@ -5,11 +5,24 @@
  */
 package main.java.View;
 
+import javax.swing.JOptionPane;
+import main.java.Controller.ClienteController;
+import main.java.model.Cliente;
+import main.java.model.Reserva;
+import main.java.resources.conversor.Conversor;
+
 /**
  *
  * @author HP - 4300
  */
 public class SolicitaReserva extends javax.swing.JDialog {
+
+    private static Cliente cliente = new Cliente();
+    private ClienteController controller;
+    private static Reserva reserva = new Reserva();
+    private String data;
+    private String hora;
+    private static int cpf;
 
     /**
      * Creates new form SolicitaReserv
@@ -17,6 +30,43 @@ public class SolicitaReserva extends javax.swing.JDialog {
     public SolicitaReserva(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+    }
+
+    public static Reserva getReserva() {
+        return reserva;
+    }
+
+    public static void setReserva(Reserva reserva) {
+        SolicitaReserva.reserva = reserva;
+    }
+
+    public static int getCpf() {
+        return cpf;
+    }
+
+    public static void setCpf(int cpf) {
+        SolicitaReserva.cpf = cpf;
+    }
+
+    public static Cliente getCliente() {
+        return cliente;
+    }
+
+    public static void setCliente(Cliente cliente) {
+        SolicitaReserva.cliente = cliente;
+    }
+
+    public void cpf(int cpf) {
+        setCpf(cpf);
+    }
+
+    public void gravaDataHora() {
+        data = txtData.getText();
+        hora = txtHoraChegada.getText();
+    }
+
+    public void GravaDadosReserva() {
+
     }
 
     /**
@@ -75,6 +125,11 @@ public class SolicitaReserva extends javax.swing.JDialog {
         txtPermanecia.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jButton1.setText("Solicitar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Voltar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -159,6 +214,23 @@ public class SolicitaReserva extends javax.swing.JDialog {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        gravaDataHora();
+        try {
+            
+            reserva.setDataInicial(Conversor.ConversorData(data));
+            reserva.setHoraEntrada(Conversor.ConversorHora(hora));
+            reserva.setDuracao(txtPermanecia.getText());
+            reserva.setStatus("solicitada");
+            reserva.setValorDiaria(40);
+            reserva.setValorTotalDiaria(40);
+            controller.ClienteReserva(cpf, reserva);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Dados inválidos! ");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
