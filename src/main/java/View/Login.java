@@ -17,7 +17,7 @@ import main.java.model.Cliente;
 public class Login extends javax.swing.JFrame {
 
     private final LoginController controller = new LoginController();
-    private ClienteController clienteController = new ClienteController();
+    private final ClienteController clienteController = new ClienteController();
 
     private Cliente c = new Cliente();
 
@@ -26,7 +26,6 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
-
     }
 
     /**
@@ -205,10 +204,8 @@ public class Login extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Login().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Login().setVisible(true);
         });
     }
 

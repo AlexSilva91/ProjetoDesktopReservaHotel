@@ -5,11 +5,20 @@
  */
 package main.java.View;
 
+import javax.swing.JOptionPane;
+import main.java.Controller.ClienteController;
+import main.java.model.Cliente;
+
 /**
  *
  * @author HP - 4300
  */
 public class CadastroCliente extends javax.swing.JFrame {
+
+    private static Cliente cliente = new Cliente();
+    private final ClienteController clienteController = new ClienteController();
+    private String nome, email, telefone;
+    private int cpf;
 
     /**
      * Creates new form MenuCadastro
@@ -17,6 +26,18 @@ public class CadastroCliente extends javax.swing.JFrame {
     public CadastroCliente() {
         initComponents();
         this.setDefaultCloseOperation(0);
+    }
+
+    public static Cliente getCliente() {
+        return cliente;
+    }
+
+    public static void setCliente(Cliente cliente) {
+        CadastroCliente.cliente = cliente;
+    }
+
+    public void Erro() {
+        JOptionPane.showMessageDialog(null, "Erro! Dados inválidos!");
     }
 
     /**
@@ -34,12 +55,12 @@ public class CadastroCliente extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtNome = new javax.swing.JTextField();
         txtCPF = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
         txtTelefone = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        txtNome = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro");
@@ -60,13 +81,12 @@ public class CadastroCliente extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel5.setText("Telefone");
 
-        txtNome.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setText("Salvar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNomeActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
-
-        jButton1.setText("Salvar");
 
         jButton2.setText("Voltar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -124,9 +144,9 @@ public class CadastroCliente extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -155,15 +175,29 @@ public class CadastroCliente extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNomeActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         Login login = new Login();
         login.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            this.nome = txtNome.getText();
+            this.email = txtEmail.getText();
+            this.telefone = txtTelefone.getText();
+            this.cpf = Integer.parseInt(txtCPF.getText());
+            Cliente c = new Cliente(cpf, nome, email, telefone);
+            setCliente(c);
+            clienteController.CadastrarCliente(getCliente());
+            System.out.println(cliente.getNome());
+            System.out.println(cliente.getCpf());
+            System.out.println(cliente.getEmail());
+        } catch (Exception e) {
+            this.Erro();
+            System.out.println(e.getMessage());
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -5,9 +5,9 @@
  */
 package testes;
 
+import main.java.Controller.ClienteController;
 import main.java.DAO.ClienteDao;
 import main.java.model.Cliente;
-import main.java.model.Reserva;
 
 /**
  *
@@ -17,11 +17,11 @@ public class TesteCliente {
 
     public static void main(String[] args) {
         Cliente cliente;
-        Reserva reserva = new Reserva();
         ClienteDao clienteDao = new ClienteDao();
-        cliente = new Cliente(123, "Alex", "alexalves9164@gmail.com", "981469865");
-        clienteDao.SaveUser(cliente);
+        cliente = new Cliente(679, "Anna", "alexalves9164@gmail.com", "981469865");
+        ClienteController controller = new ClienteController();
+        controller.CadastrarCliente(cliente);
+
     }
 
 }
-  

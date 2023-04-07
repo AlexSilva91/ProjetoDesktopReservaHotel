@@ -6,8 +6,10 @@
 package main.java.Controller;
 
 import javax.persistence.EntityManager;
+import javax.swing.JOptionPane;
 import main.java.ConnectionFactory.ConnectionFactory;
 import main.java.DAO.ClienteDao;
+import main.java.View.CadastroCliente;
 import main.java.View.ClienteView;
 import main.java.View.DeletarPerfil;
 import main.java.View.EditarPerfil;
@@ -25,10 +27,21 @@ public class ClienteController {
     private final EditarPerfil editarPerfil = new EditarPerfil();
     private final ClienteView clienteView = new ClienteView();
     private final DeletarPerfil deletarPerfil = new DeletarPerfil();
+    private final CadastroCliente cadastroCliente = null;
     private static int cpf;
 
-    public void CadastrarCliente() {
-
+    public void CadastrarCliente(Cliente c) {
+        try {
+            cliente = this.Consulta(c.getCpf());
+            if (cliente == null) {
+                clienteDao.SaveCliente(c);
+                JOptionPane.showMessageDialog(null, "Dados Cadastrados!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Cpf já cadastrado!");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro! Dados inválidos!\n"+e.getMessage());
+        }
     }
 
     public void AtualizaDadosCliente() {

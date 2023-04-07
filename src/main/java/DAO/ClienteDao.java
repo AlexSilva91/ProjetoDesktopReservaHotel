@@ -18,18 +18,17 @@ import main.java.model.Cliente;
 public class ClienteDao {
 
     private final EntityManager em = ConnectionFactory.getConnection();
-    
 
-    public void SaveUser(Cliente cliente) {
+    public void SaveCliente(Cliente cliente) {
         try {
             this.em.getTransaction().begin();
             this.em.persist(cliente);
             this.em.getTransaction().commit();
-            this.em.getTransaction().rollback();
-            this.em.close();
         } catch (Exception e) {
+            this.em.getTransaction().rollback();
             e.getMessage();
         }
+        
     }
 
     public List<Cliente> ConsultCliente(int id) {
