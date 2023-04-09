@@ -26,6 +26,7 @@ public class ClienteController {
     private final EntityManager em = ConnectionFactory.getConnection();
     private final ClienteDao clienteDao = new ClienteDao();
     private static Cliente cliente = new Cliente();
+    private static Reserva reserva = new Reserva();
     private final EditarPerfil editarPerfil = new EditarPerfil();
     private final ClienteView clienteView = new ClienteView();
     private final DeletarPerfil deletarPerfil = new DeletarPerfil();
@@ -88,15 +89,23 @@ public class ClienteController {
         }
     }
 
-    public void ClienteReserva(int cpf, Reserva r) {
+    public void ClienteReserva() {
         try {
-            cliente = Consulta(cpf);
-            em.detach(cliente);
-            cliente.setReserva(r);
-            clienteDao.AtualizaCliente(cliente);
-            JOptionPane.showMessageDialog(null, "Reserva solicitada!");
+            cliente = this.Consulta(cpf);
+            if (cliente.getCpf() == cpf) {
+                em.detach(cliente);
+                cliente.getReserva().setCliente(cliente);
+                cliente.getReserva().setDataInicial(SolicitaReserva.getDataInicial());
+                cliente.getReserva().setStatus("pendente");
+                cliente.getReserva().setDataFinal(SolicitaReserva.getDataFinal());
+                cliente.getReserva().setHoraEntrada(SolicitaReserva.getHoraEntrada());
+                cliente.setReserva(reserva);
+                clienteDao.AtualizaCliente(cliente);
+                solicitaReserva.ReservaSalva();
+                clienteView.recebeCliente(cliente);
+            }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro! " +e);
+            solicitaReserva.Erro();
         }
     }
 

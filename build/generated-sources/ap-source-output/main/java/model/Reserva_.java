@@ -1,6 +1,7 @@
 package main.java.model;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
@@ -10,7 +11,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 public abstract class Reserva_ {
 
 	public static volatile SingularAttribute<Reserva, Cliente> cliente;
-	public static volatile SingularAttribute<Reserva, LocalDate> horaEntrada;
+	public static volatile SingularAttribute<Reserva, LocalTime> horaEntrada;
 	public static volatile SingularAttribute<Reserva, Double> valorDiaria;
 	public static volatile SingularAttribute<Reserva, Integer> id;
 	public static volatile SingularAttribute<Reserva, LocalDate> dataInicial;

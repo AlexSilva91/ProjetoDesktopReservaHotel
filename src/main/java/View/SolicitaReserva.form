@@ -69,8 +69,8 @@
                       <Group type="103" alignment="0" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="txtPermanecia" alignment="1" min="-2" pref="169" max="-2" attributes="0"/>
-                                  <Component id="txtData" alignment="1" min="-2" pref="169" max="-2" attributes="0"/>
+                                  <Component id="txtDataFin" alignment="1" min="-2" pref="169" max="-2" attributes="0"/>
+                                  <Component id="txtDataInit" alignment="1" min="-2" pref="169" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="102" max="-2" attributes="0"/>
                           </Group>
@@ -99,11 +99,11 @@
               <Group type="102" alignment="0" attributes="0">
                   <Component id="jLabel1" min="-2" pref="34" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="txtData" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtDataInit" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel3" min="-2" pref="34" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="txtPermanecia" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtDataFin" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" pref="34" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -143,7 +143,7 @@
             <Property name="text" type="java.lang.String" value="Permanencia"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="txtData">
+        <Component class="javax.swing.JFormattedTextField" name="txtDataInit">
           <Properties>
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
               <Format format="**/**/****" subtype="-1" type="5"/>
@@ -159,7 +159,7 @@
             <Property name="horizontalAlignment" type="int" value="0"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="txtPermanecia">
+        <Component class="javax.swing.JFormattedTextField" name="txtDataFin">
           <Properties>
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
               <Format format="**/**/****" subtype="-1" type="5"/>

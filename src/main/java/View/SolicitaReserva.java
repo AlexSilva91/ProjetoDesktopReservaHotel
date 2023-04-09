@@ -5,6 +5,8 @@
  */
 package main.java.View;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import javax.swing.JOptionPane;
 import main.java.Controller.ClienteController;
 import main.java.model.Cliente;
@@ -18,11 +20,13 @@ import main.java.resources.conversor.Conversor;
 public class SolicitaReserva extends javax.swing.JDialog {
 
     private static Cliente cliente = new Cliente();
-    private ClienteController controller;
     private static Reserva reserva = new Reserva();
-    private String data;
+    private ClienteController controller;
+    private String dataInit, dataFin;
     private String hora;
-    private static int cpf;
+    private static LocalDate dataInicial;
+    private static LocalTime horaEntrada;
+    private static LocalDate dataFinal;
 
     /**
      * Creates new form SolicitaReserv
@@ -32,20 +36,28 @@ public class SolicitaReserva extends javax.swing.JDialog {
         initComponents();
     }
 
-    public static Reserva getReserva() {
-        return reserva;
+    public static LocalDate getDataInicial() {
+        return dataInicial;
     }
 
-    public static void setReserva(Reserva reserva) {
-        SolicitaReserva.reserva = reserva;
+    public static void setDataInicial(LocalDate dataInicial) {
+        SolicitaReserva.dataInicial = dataInicial;
     }
 
-    public static int getCpf() {
-        return cpf;
+    public static LocalTime getHoraEntrada() {
+        return horaEntrada;
     }
 
-    public static void setCpf(int cpf) {
-        SolicitaReserva.cpf = cpf;
+    public static void setHoraEntrada(LocalTime horaEntrada) {
+        SolicitaReserva.horaEntrada = horaEntrada;
+    }
+
+    public static LocalDate getDataFinal() {
+        return dataFinal;
+    }
+
+    public static void setDataFinal(LocalDate dataFinal) {
+        SolicitaReserva.dataFinal = dataFinal;
     }
 
     public static Cliente getCliente() {
@@ -56,17 +68,30 @@ public class SolicitaReserva extends javax.swing.JDialog {
         SolicitaReserva.cliente = cliente;
     }
 
-    public void cpf(int cpf) {
-        setCpf(cpf);
+    public static Reserva getReserva() {
+        return reserva;
     }
 
-    public void gravaDataHora() {
-        data = txtData.getText();
-        hora = txtHoraChegada.getText();
+    public static void setReserva(Reserva reserva) {
+        SolicitaReserva.reserva = reserva;
     }
 
-    public void GravaDadosReserva() {
+    public void RecebeCliente(Cliente c) {
+        setCliente(c);
+    }
 
+    public void Exibe() {
+        System.out.println("¨¨¨¨¨¨¨¨SR¨¨¨¨¨¨¨¨");
+        System.out.println("\nNome: " + getCliente().getNome());
+        System.out.println("¨¨¨¨¨¨¨¨SR¨¨¨¨¨¨¨");
+    }
+
+    public void ReservaSalva() {
+        JOptionPane.showMessageDialog(null, "Reserva solicitada!");
+    }
+
+    public void Erro() {
+        JOptionPane.showMessageDialog(null, "Dados inválidos! ");
     }
 
     /**
@@ -82,9 +107,9 @@ public class SolicitaReserva extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txtData = new javax.swing.JFormattedTextField();
+        txtDataInit = new javax.swing.JFormattedTextField();
         txtHoraChegada = new javax.swing.JFormattedTextField();
-        txtPermanecia = new javax.swing.JFormattedTextField();
+        txtDataFin = new javax.swing.JFormattedTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
@@ -104,11 +129,11 @@ public class SolicitaReserva extends javax.swing.JDialog {
         jLabel3.setText("Permanencia");
 
         try {
-            txtData.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("**/**/****")));
+            txtDataInit.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("**/**/****")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        txtData.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtDataInit.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         try {
             txtHoraChegada.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("**:**")));
@@ -118,11 +143,11 @@ public class SolicitaReserva extends javax.swing.JDialog {
         txtHoraChegada.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         try {
-            txtPermanecia.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("**/**/****")));
+            txtDataFin.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("**/**/****")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        txtPermanecia.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtDataFin.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jButton1.setText("Solicitar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -153,8 +178,8 @@ public class SolicitaReserva extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(txtPermanecia, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtDataFin, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtDataInit, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGap(102, 102, 102))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -174,11 +199,11 @@ public class SolicitaReserva extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtDataInit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtPermanecia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtDataFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -216,19 +241,20 @@ public class SolicitaReserva extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        gravaDataHora();
+        dataInit = txtDataInit.getText();
+        dataFin = txtDataFin.getText();
+        hora = txtHoraChegada.getText();
+        dataFinal = Conversor.ConversorData(dataFin);
+        dataInicial = Conversor.ConversorData(dataInit);
+        horaEntrada = Conversor.ConversorHora(hora);
+        System.out.println(dataInicial);
+        System.out.println("Data: " + dataFinal);
+        System.out.println("Hora: " + horaEntrada);
         try {
-            
-            reserva.setDataInicial(Conversor.ConversorData(data));
-            reserva.setHoraEntrada(Conversor.ConversorHora(hora));
-            reserva.setDuracao(txtPermanecia.getText());
-            reserva.setStatus("solicitada");
-            reserva.setValorDiaria(40);
-            reserva.setValorTotalDiaria(40);
-            controller.ClienteReserva(cpf, reserva);
+            controller.ClienteReserva();
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            JOptionPane.showMessageDialog(null, "Dados inválidos! ");
+
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -282,8 +308,8 @@ public class SolicitaReserva extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JFormattedTextField txtData;
+    private javax.swing.JFormattedTextField txtDataFin;
+    private javax.swing.JFormattedTextField txtDataInit;
     private javax.swing.JFormattedTextField txtHoraChegada;
-    private javax.swing.JFormattedTextField txtPermanecia;
     // End of variables declaration//GEN-END:variables
 }

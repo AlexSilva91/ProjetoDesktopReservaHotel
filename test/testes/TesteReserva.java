@@ -27,12 +27,13 @@ public class TesteReserva {
             Reserva reserva = new Reserva();
             reserva.setStatus("Pendente");
             reserva.setDataInicial(Conversor.ConversorData("21/05/2040"));
+            reserva.setDataFinal(Conversor.ConversorData("21/06/2040"));
             reserva.setHoraEntrada(Conversor.ConversorHora("14:30"));
             reserva.setValorDiaria(50);
             reserva.setValorTotalDiaria(50);
             reserva.setDuracao("2 Dias");
             Cliente cliente = new Cliente();
-            cliente = new Cliente(120, "Joana", "joana9164@gmail.com", "981469865", reserva);
+            cliente = new Cliente(12, "Joana", "joana9164@gmail.com", "981469865", reserva);
 
             reserva.setCliente(cliente);
             reservaDao.SaveReserva(reserva);

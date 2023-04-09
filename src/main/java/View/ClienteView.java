@@ -167,14 +167,13 @@ public class ClienteView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        System.out.println("++++++++++");
+        System.out.println("+++++CV+++++");
         exibe();
-        System.out.println("----------");
+        System.out.println("-----CV-----");
         SolicitaReserva reserva = new SolicitaReserva(new JFrame(), true);
-        reserva.cpf(cliente.getCpf());
+        reserva.RecebeCliente(this.getCliente());
+        reserva.Exibe();
         reserva.setVisible(true);
-        System.out.println(cliente.getCpf());
-
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -182,9 +181,6 @@ public class ClienteView extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        System.out.println("++++++++++");
-        exibe();
-        System.out.println("----------");
         EditarPerfil editarPerfil = new EditarPerfil();
         editarPerfil.PasClient(cliente);
         editarPerfil.setVisible(true);

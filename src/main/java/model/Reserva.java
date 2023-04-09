@@ -24,6 +24,8 @@ public class Reserva implements Serializable {
     @Column
     private LocalDate dataInicial;
     @Column
+    private LocalDate dataFinal;
+    @Column
     private LocalTime horaEntrada;
     @Column
     private String duracao;
@@ -40,12 +42,21 @@ public class Reserva implements Serializable {
     public Reserva() {
     }
 
-    public Reserva(LocalDate dataInicial, LocalTime horaEntrada, String status, String duracao, Cliente cliente) {
+    public Reserva(LocalDate dataInicial, LocalDate dataFinal, LocalTime horaEntrada, String status, String duracao, Cliente cliente) {
         this.dataInicial = dataInicial;
+        this.dataFinal = dataFinal;
         this.horaEntrada = horaEntrada;
         this.status = status;
         this.duracao = duracao;
         this.cliente = cliente;
+    }
+
+    public LocalDate getDataFinal() {
+        return dataFinal;
+    }
+
+    public void setDataFinal(LocalDate dataFinal) {
+        this.dataFinal = dataFinal;
     }
 
     public int getId() {

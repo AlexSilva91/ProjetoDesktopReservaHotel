@@ -7,7 +7,6 @@ package main.java.View;
 
 import javax.swing.JOptionPane;
 import main.java.Controller.ClienteController;
-import main.java.DAO.ClienteDao;
 import main.java.model.Cliente;
 
 /**
@@ -18,9 +17,7 @@ public class EditarPerfil extends javax.swing.JFrame {
 
     private static Cliente c = new Cliente();
     private static Cliente c1;
-    private ClienteView clienteView;
     private static final ClienteController clienteControler = new ClienteController();
-    private static final ClienteDao clienteDao = new ClienteDao();
     private static String nome;
     private static String email;
     private static String telefone;

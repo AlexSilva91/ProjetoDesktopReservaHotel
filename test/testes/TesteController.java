@@ -5,11 +5,10 @@
  */
 package testes;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import main.java.Controller.ClienteController;
 import main.java.model.Cliente;
 import main.java.model.Reserva;
+import main.java.resources.conversor.Conversor;
 
 /**
  *
@@ -21,17 +20,16 @@ public class TesteController {
         ClienteController clienteController = new ClienteController();
         Reserva reserva = new Reserva();
         Cliente cliente = new Cliente();
+        String dataIni = "07/02/2025";
+        String dataFini = "07/02/2026";
+        String hora = "20:30";
         try {
-            cliente = clienteController.Consulta(679);
-            reserva.setDataInicial(LocalDate.now());
-            reserva.setHoraEntrada(LocalTime.now());
-            reserva.setStatus("aprovada");
-            reserva.setDuracao("5 Dias");
-            reserva.setValorTotalDiaria(40);
+            reserva.setDataInicial(Conversor.ConversorData(dataIni));
+            reserva.setDataFinal(Conversor.ConversorData(dataFini));
+            reserva.setHoraEntrada(Conversor.ConversorHora(hora));
+            reserva.setStatus("pendente");
             reserva.setValorDiaria(40);
-            reserva.setCliente(cliente);
-            cliente.setReserva(reserva);
-            clienteController.ClienteReserva(cliente.getCpf(), reserva);
+            clienteController.ClienteReserva();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
