@@ -31,7 +31,6 @@ public class TesteAtualizaCliente {
             reserva.setDataInicial(LocalDate.now());
             reserva.setHoraEntrada(LocalTime.now());
             reserva.setStatus("aprovada");
-            reserva.setDuracao("2 Dias");
             reserva.setValorTotalDiaria(40);
             reserva.setValorDiaria(40);
             reserva.setCliente(cliente);

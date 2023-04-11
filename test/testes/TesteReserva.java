@@ -31,7 +31,6 @@ public class TesteReserva {
             reserva.setHoraEntrada(Conversor.ConversorHora("14:30"));
             reserva.setValorDiaria(50);
             reserva.setValorTotalDiaria(50);
-            reserva.setDuracao("2 Dias");
             Cliente cliente = new Cliente();
             cliente = new Cliente(12, "Joana", "joana9164@gmail.com", "981469865", reserva);
 
