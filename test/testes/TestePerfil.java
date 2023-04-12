@@ -5,6 +5,7 @@
  */
 package testes;
 
+import java.util.List;
 import java.util.Scanner;
 import main.java.Controller.LoginController;
 import main.java.DAO.ClienteDao;
@@ -22,6 +23,7 @@ public class TestePerfil {
         LoginController lc = new LoginController();
         ClienteDao cd = new ClienteDao();
         Cliente c = new Cliente();
+        List<Cliente> client;
         Scanner tc = new Scanner(System.in);
         do {
             System.out.println("0 - Sair");
@@ -37,19 +39,19 @@ public class TestePerfil {
                     int cpf = tc.nextInt();
                     Perfil.setCpf(cpf);
                     if (lc.checkLogin(email, cpf)) {
+                        client = cd.ConsultCliente(Perfil.getCpf());
                         do {
-                            System.out.println("0 - Sair");
-                            System.out.println("1 - Exibir CPF");
+                            System.out.println("1 - Sair");
+                            System.out.println("2 - Exibir CPF");
+                            System.out.println("3 - Exibir Reserva");
                             op1 = tc.nextInt();
                             switch (op1) {
-                                case 0:
-                                    break;
                                 case 1:
-                                    System.out.println("CPF: "+Perfil.getCpf());
-                                    c = cd.findById(Perfil.getCpf());
-                                    System.out.println("Nome: "+c.getNome());
-                                    System.out.println("Email: "+c.getEmail());
-                                    System.out.println("Telefone: "+c.getTelefone());
+                                    break;
+                                case 2:
+                                    System.out.println("Nome: " + c.getNome());
+                                    System.out.println("Email: " + c.getEmail());
+                                    System.out.println("Telefone: " + c.getTelefone());
                                     break;
                             }
                         } while (op1 != 1);
@@ -58,7 +60,7 @@ public class TestePerfil {
                     }
             }
 
-        } while (op != 1);
+        } while (op != 0);
 
     }
 }

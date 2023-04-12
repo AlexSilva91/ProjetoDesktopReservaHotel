@@ -22,6 +22,8 @@ public class Reserva implements Serializable {
     @Column
     private int id;
     @Column
+    private int cod;
+    @Column
     private LocalDate dataInicial;
     @Column
     private LocalDate dataFinal;
@@ -33,19 +35,16 @@ public class Reserva implements Serializable {
     private double valorDiaria;
     @Column
     private double valorTotalDiaria;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn
-    private Cliente cliente;
 
     public Reserva() {
     }
 
-    public Reserva(LocalDate dataInicial, LocalDate dataFinal, LocalTime horaEntrada, String status, Cliente cliente) {
+    public Reserva(LocalDate dataInicial, LocalDate dataFinal, LocalTime horaEntrada, String status, int cod) {
         this.dataInicial = dataInicial;
         this.dataFinal = dataFinal;
         this.horaEntrada = horaEntrada;
         this.status = status;
-        this.cliente = cliente;
+        this.cod = cod;
     }
 
     public LocalDate getDataFinal() {
@@ -80,6 +79,14 @@ public class Reserva implements Serializable {
         this.horaEntrada = horaEntrada;
     }
 
+    public int getCod() {
+        return cod;
+    }
+
+    public void setCod(int cod) {
+        this.cod = cod;
+    }
+
     public String getStatus() {
         return status;
     }
@@ -104,13 +111,6 @@ public class Reserva implements Serializable {
         this.valorTotalDiaria = valorTotalDiaria;
     }
 
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
 
     @Override
     public String toString() {
@@ -119,7 +119,7 @@ public class Reserva implements Serializable {
                 + ", horaEntrada=" + horaEntrada
                 + ", status=" + status + ", valorDiaria="
                 + valorDiaria + ", valorTotalDiaria="
-                + valorTotalDiaria + ", cliente=" + cliente + '}';
+                + valorTotalDiaria + ", cod=" + cod + '}';
     }
 
 }

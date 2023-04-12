@@ -8,7 +8,7 @@ package main.java.View;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import javax.swing.JOptionPane;
-import main.java.Controller.ClienteController;
+import main.java.Controller.ReservaController;
 import main.java.model.Cliente;
 import main.java.model.Reserva;
 import main.java.resources.conversor.Conversor;
@@ -21,9 +21,7 @@ public class SolicitaReserva extends javax.swing.JDialog {
 
     private static Cliente cliente = new Cliente();
     private static Reserva reserva = new Reserva();
-    private ClienteController controller;
-    private String dataInit, dataFin;
-    private String hora;
+    private ReservaController controller;
     private static LocalDate dataInicial;
     private static LocalTime horaEntrada;
     private static LocalDate dataFinal;
@@ -241,17 +239,21 @@ public class SolicitaReserva extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        dataInit = txtDataInit.getText();
-        dataFin = txtDataFin.getText();
-        hora = txtHoraChegada.getText();
-        dataFinal = Conversor.ConversorData(dataFin);
-        dataInicial = Conversor.ConversorData(dataInit);
-        horaEntrada = Conversor.ConversorHora(hora);
-        System.out.println(dataInicial);
+        dataFinal = Conversor.ConversorData(txtDataFin.getText());
+        dataInicial = Conversor.ConversorData(txtDataInit.getText());
+        horaEntrada = Conversor.ConversorHora(txtHoraChegada.getText());
+       
+        System.out.println(">>>>>>>>>>>>>");
         System.out.println("Data: " + dataFinal);
         System.out.println("Hora: " + horaEntrada);
         try {
-            controller.ClienteReserva();
+            reserva.setDataInicial(dataInicial);
+            reserva.setDataFinal(dataFinal);
+            reserva.setHoraEntrada(horaEntrada);
+            reserva.setStatus("pendente");
+            reserva.setValorDiaria(40);
+            reserva.setCod(cliente.getCpf());
+            controller.CadastrarReserva(reserva);
         } catch (Exception e) {
             System.out.println(e.getMessage());
 

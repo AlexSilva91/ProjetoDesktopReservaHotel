@@ -5,6 +5,7 @@
  */
 package main.java.Controller;
 
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.swing.JOptionPane;
 import main.java.ConnectionFactory.ConnectionFactory;
@@ -15,7 +16,6 @@ import main.java.View.DeletarPerfil;
 import main.java.View.EditarPerfil;
 import main.java.View.SolicitaReserva;
 import main.java.model.Cliente;
-import main.java.model.Reserva;
 
 /**
  *
@@ -26,7 +26,6 @@ public class ClienteController {
     private final EntityManager em = ConnectionFactory.getConnection();
     private final ClienteDao clienteDao = new ClienteDao();
     private static Cliente cliente = new Cliente();
-    private static Reserva reserva = new Reserva();
     private final EditarPerfil editarPerfil = new EditarPerfil();
     private final ClienteView clienteView = new ClienteView();
     private final DeletarPerfil deletarPerfil = new DeletarPerfil();
@@ -64,7 +63,6 @@ public class ClienteController {
         } catch (Exception e) {
             editarPerfil.ExibeErro(e);
         }
-
     }
 
     public Cliente Consulta(int cpf) {
@@ -89,24 +87,11 @@ public class ClienteController {
         }
     }
 
-    public void ClienteReserva() {
-        try {
-            cliente = this.Consulta(cpf);
-            if (cliente.getCpf() == cpf) {
-                em.detach(cliente);
-                cliente.getReserva().setCliente(cliente);
-                cliente.getReserva().setDataInicial(SolicitaReserva.getDataInicial());
-                cliente.getReserva().setStatus("pendente");
-                cliente.getReserva().setDataFinal(SolicitaReserva.getDataFinal());
-                cliente.getReserva().setHoraEntrada(SolicitaReserva.getHoraEntrada());
-                cliente.setReserva(reserva);
-                clienteDao.AtualizaCliente(cliente);
-                solicitaReserva.ReservaSalva();
-                clienteView.recebeCliente(cliente);
-            }
-        } catch (Exception e) {
-            solicitaReserva.Erro();
-        }
+    public List<Cliente> cliente(int cpf) {
+        List<Cliente> clientes;
+        clientes = clienteDao.ConsultCliente(cpf);
+
+        return clientes;
     }
 
     public int getCpf() {

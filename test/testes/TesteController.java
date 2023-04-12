@@ -23,15 +23,18 @@ public class TesteController {
         String dataIni = "07/02/2025";
         String dataFini = "07/02/2026";
         String hora = "20:30";
+        boolean status = false;
         try {
+            cliente = clienteController.Consulta(123);
             reserva.setDataInicial(Conversor.ConversorData(dataIni));
             reserva.setDataFinal(Conversor.ConversorData(dataFini));
             reserva.setHoraEntrada(Conversor.ConversorHora(hora));
             reserva.setStatus("pendente");
             reserva.setValorDiaria(40);
-            clienteController.ClienteReserva();
         } catch (Exception e) {
             System.out.println(e.getMessage());
+        }finally{
+            System.out.println("Fim");
         }
     }
 }
