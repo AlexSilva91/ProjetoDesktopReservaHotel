@@ -15,8 +15,8 @@ public abstract class Reserva_ {
 	public static volatile SingularAttribute<Reserva, Double> valorDiaria;
 	public static volatile SingularAttribute<Reserva, Integer> id;
 	public static volatile SingularAttribute<Reserva, LocalDate> dataInicial;
-	public static volatile SingularAttribute<Reserva, String> duracao;
 	public static volatile SingularAttribute<Reserva, Double> valorTotalDiaria;
+	public static volatile SingularAttribute<Reserva, LocalDate> dataFinal;
 	public static volatile SingularAttribute<Reserva, String> status;
 
 	public static final String CLIENTE = "cliente";
@@ -24,8 +24,8 @@ public abstract class Reserva_ {
 	public static final String VALOR_DIARIA = "valorDiaria";
 	public static final String ID = "id";
 	public static final String DATA_INICIAL = "dataInicial";
-	public static final String DURACAO = "duracao";
 	public static final String VALOR_TOTAL_DIARIA = "valorTotalDiaria";
+	public static final String DATA_FINAL = "dataFinal";
 	public static final String STATUS = "status";
 
 }
