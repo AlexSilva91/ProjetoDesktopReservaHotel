@@ -8,7 +8,8 @@ package testes;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 import main.java.ConnectionFactory.ConnectionFactory;
-import main.java.Controller.ReservaController;
+import main.java.DAO.ReservaDao;
+import main.java.model.Cliente;
 import main.java.model.Reserva;
 import main.java.resources.conversor.Conversor;
 
@@ -20,7 +21,7 @@ public class TesteReserva {
 
     public static void main(String[] args) {
         EntityManager em = ConnectionFactory.getConnection();
-        ReservaController reservaC = new ReservaController();
+        ReservaDao reservaDao = new ReservaDao();
 
         try {
             Reserva reserva = new Reserva();
@@ -30,8 +31,11 @@ public class TesteReserva {
             reserva.setHoraEntrada(Conversor.ConversorHora("14:30"));
             reserva.setValorDiaria(50);
             reserva.setValorTotalDiaria(50);
-            reserva.setCod(123);
-            reservaC.CadastrarReserva(reserva);
+            Cliente cliente = new Cliente();
+            cliente = new Cliente(12, "Joana", "joana9164@gmail.com", "981469865", reserva);
+
+            reserva.setCliente(cliente);
+            reservaDao.SaveReserva(reserva);
         } catch (PersistenceException e) {
             System.out.println("CPF inválido!");
         }

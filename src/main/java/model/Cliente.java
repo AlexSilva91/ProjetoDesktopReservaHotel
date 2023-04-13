@@ -6,9 +6,12 @@
 package main.java.model;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -26,13 +29,23 @@ public class Cliente implements Serializable {
     private String email;
     @Column
     private String telefone;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn
+    private Reserva reserva;
+
+    public Reserva getReserva() {
+        return reserva;
+    }
+
+    public void setReserva(Reserva reserva) {
+        this.reserva = reserva;
+    }
 
     public Cliente(String nome, String email, String telefone) {
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
     }
-
     public Cliente(int cpf, String nome, String email, String telefone) {
         this.cpf = cpf;
         this.nome = nome;
@@ -42,6 +55,14 @@ public class Cliente implements Serializable {
 
     public Cliente() {
 
+    }
+
+    public Cliente(int cpf, String nome, String email, String telefone, Reserva reserva) {
+        this.cpf = cpf;
+        this.nome = nome;
+        this.email = email;
+        this.telefone = telefone;
+        this.reserva = reserva;
     }
 
     public String getNome() {

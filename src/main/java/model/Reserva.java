@@ -6,8 +6,6 @@
 package main.java.model;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import javax.persistence.*;
 
 /**
@@ -22,37 +20,31 @@ public class Reserva implements Serializable {
     @Column
     private int id;
     @Column
-    private int cod;
+    private String dataInicial;
     @Column
-    private LocalDate dataInicial;
+    private String dataFinal;
     @Column
-    private LocalDate dataFinal;
-    @Column
-    private LocalTime horaEntrada;
+    private String horaEntrada;
     @Column
     private String status;
     @Column
     private double valorDiaria;
     @Column
     private double valorTotalDiaria;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn
+    private Cliente cliente;
 
     public Reserva() {
     }
 
-    public Reserva(LocalDate dataInicial, LocalDate dataFinal, LocalTime horaEntrada, String status, int cod) {
+    public Reserva(String dataInicial, String dataFinal, String horaEntrada, String status, double valorDiaria, Cliente cliente) {
         this.dataInicial = dataInicial;
         this.dataFinal = dataFinal;
         this.horaEntrada = horaEntrada;
         this.status = status;
-        this.cod = cod;
-    }
-
-    public LocalDate getDataFinal() {
-        return dataFinal;
-    }
-
-    public void setDataFinal(LocalDate dataFinal) {
-        this.dataFinal = dataFinal;
+        this.valorDiaria = valorDiaria;
+        this.cliente = cliente;
     }
 
     public int getId() {
@@ -63,28 +55,28 @@ public class Reserva implements Serializable {
         this.id = id;
     }
 
-    public LocalDate getDataInicial() {
+    public String getDataInicial() {
         return dataInicial;
     }
 
-    public void setDataInicial(LocalDate dataInicial) {
+    public void setDataInicial(String dataInicial) {
         this.dataInicial = dataInicial;
     }
 
-    public LocalTime getHoraEntrada() {
+    public String getDataFinal() {
+        return dataFinal;
+    }
+
+    public void setDataFinal(String dataFinal) {
+        this.dataFinal = dataFinal;
+    }
+
+    public String getHoraEntrada() {
         return horaEntrada;
     }
 
-    public void setHoraEntrada(LocalTime horaEntrada) {
+    public void setHoraEntrada(String horaEntrada) {
         this.horaEntrada = horaEntrada;
-    }
-
-    public int getCod() {
-        return cod;
-    }
-
-    public void setCod(int cod) {
-        this.cod = cod;
     }
 
     public String getStatus() {
@@ -111,6 +103,13 @@ public class Reserva implements Serializable {
         this.valorTotalDiaria = valorTotalDiaria;
     }
 
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
 
     @Override
     public String toString() {
@@ -119,7 +118,7 @@ public class Reserva implements Serializable {
                 + ", horaEntrada=" + horaEntrada
                 + ", status=" + status + ", valorDiaria="
                 + valorDiaria + ", valorTotalDiaria="
-                + valorTotalDiaria + ", cod=" + cod + '}';
+                + valorTotalDiaria + ", cliente=" + cliente + '}';
     }
 
 }

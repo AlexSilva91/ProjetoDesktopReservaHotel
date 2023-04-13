@@ -33,6 +33,8 @@ public class TesteAtualizaCliente {
             reserva.setStatus("aprovada");
             reserva.setValorTotalDiaria(40);
             reserva.setValorDiaria(40);
+            reserva.setCliente(cliente);
+            cliente.setReserva(reserva);
             clienteDao.AtualizaCliente(cliente);
         } catch (Exception e) {
             System.out.println(e.getMessage());

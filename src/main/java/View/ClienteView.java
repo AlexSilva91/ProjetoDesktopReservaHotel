@@ -5,7 +5,6 @@
  */
 package main.java.View;
 
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import main.java.DAO.ClienteDao;
 import main.java.model.Cliente;
@@ -18,7 +17,6 @@ public class ClienteView extends javax.swing.JFrame {
 
     private static Cliente cliente = new Cliente();
     private static final ClienteDao clienteDao = new ClienteDao();
-    private final SolicitaReserva reserv = new SolicitaReserva(new JFrame(), true);
     private final EditarPerfil perfil = new EditarPerfil();
     private int id;
 
@@ -170,7 +168,7 @@ public class ClienteView extends javax.swing.JFrame {
         System.out.println("+++++CV+++++");
         exibe();
         System.out.println("-----CV-----");
-        SolicitaReserva reserva = new SolicitaReserva(new JFrame(), true);
+        CadastroReserva reserva = new CadastroReserva();
         reserva.RecebeCliente(this.getCliente());
         reserva.Exibe();
         reserva.setVisible(true);

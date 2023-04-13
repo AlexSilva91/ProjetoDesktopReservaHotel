@@ -3,9 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/HP%20-%204300/Documents/NetBeansProjects/ProjetoDesktopReservaHotel/src/main/java/View/SolicitaReserva.java</file>
+            <file>file:/C:/Users/HP%20-%204300/Documents/NetBeansProjects/ProjetoDesktopReservaHotel/src/main/java/View/CadastroReserva.java</file>
             <file>file:/C:/Users/HP%20-%204300/Documents/NetBeansProjects/ProjetoDesktopReservaHotel/src/main/java/View/Login.java</file>
-            <file>file:/C:/Users/HP%20-%204300/Documents/NetBeansProjects/ProjetoDesktopReservaHotel/src/main/java/Controller/ReservaController.java</file>
+            <file>file:/C:/Users/HP%20-%204300/Documents/NetBeansProjects/ProjetoDesktopReservaHotel/src/main/java/Controller/ClienteController.java</file>
         </group>
     </open-files>
 </project-private>

@@ -5,17 +5,17 @@
  */
 package main.java.Controller;
 
-import java.util.List;
 import javax.persistence.EntityManager;
 import javax.swing.JOptionPane;
 import main.java.ConnectionFactory.ConnectionFactory;
 import main.java.DAO.ClienteDao;
 import main.java.View.CadastroCliente;
+import main.java.View.CadastroReserva;
 import main.java.View.ClienteView;
 import main.java.View.DeletarPerfil;
 import main.java.View.EditarPerfil;
-import main.java.View.SolicitaReserva;
 import main.java.model.Cliente;
+import main.java.model.Reserva;
 
 /**
  *
@@ -26,11 +26,12 @@ public class ClienteController {
     private final EntityManager em = ConnectionFactory.getConnection();
     private final ClienteDao clienteDao = new ClienteDao();
     private static Cliente cliente = new Cliente();
+    private static Reserva reserva = new Reserva();
     private final EditarPerfil editarPerfil = new EditarPerfil();
     private final ClienteView clienteView = new ClienteView();
     private final DeletarPerfil deletarPerfil = new DeletarPerfil();
     private final CadastroCliente cadastroCliente = null;
-    private final SolicitaReserva solicitaReserva = null;
+    private final CadastroReserva cadastroReserva = null;
     private static int cpf;
 
     public void CadastrarCliente(Cliente c) {
@@ -63,6 +64,7 @@ public class ClienteController {
         } catch (Exception e) {
             editarPerfil.ExibeErro(e);
         }
+
     }
 
     public Cliente Consulta(int cpf) {
@@ -87,11 +89,25 @@ public class ClienteController {
         }
     }
 
-    public List<Cliente> cliente(int cpf) {
-        List<Cliente> clientes;
-        clientes = clienteDao.ConsultCliente(cpf);
-
-        return clientes;
+    public void ClienteReserva(Cliente c) {
+        try {
+            cliente = this.Consulta(c.getCpf());
+            reserva = cliente.getReserva();
+            if (reserva == null) {
+                em.detach(cliente);
+                reserva.setDataInicial(CadastroReserva.getDataInicial());
+                reserva.setStatus("pendente");
+                reserva.setDataFinal(CadastroReserva.getDataFinal());
+                reserva.setHoraEntrada(CadastroReserva.getHora());
+                reserva.setCliente(cliente);
+                cliente.setReserva(reserva);
+                clienteDao.AtualizaCliente(cliente);
+                cadastroReserva.ReservaSalva();
+                clienteView.recebeCliente(cliente);
+            }
+        } catch (Exception e) {
+            cadastroReserva.Erro();
+        }
     }
 
     public int getCpf() {

@@ -21,6 +21,7 @@ public class TesteRemoveReserva {
         try {
             c = cd.findById(123);
             System.out.println(c.getNome());
+            System.out.println(c.getReserva().getStatus());
 
         } catch (EntityNotFoundException e) {
             System.out.println("Usuário não existe!");
