@@ -14,7 +14,6 @@ import main.java.View.ClienteView;
 import main.java.View.DeletarPerfil;
 import main.java.View.EditarPerfil;
 import main.java.model.Cliente;
-import main.java.model.Reserva;
 
 /**
  *
@@ -25,7 +24,6 @@ public class ClienteController {
     private final EntityManager em = ConnectionFactory.getConnection();
     private final ClienteDao clienteDao = new ClienteDao();
     private static Cliente cliente = new Cliente();
-    private static Reserva reserva = new Reserva();
     private final EditarPerfil editarPerfil = new EditarPerfil();
     private final ClienteView clienteView = new ClienteView();
     private final DeletarPerfil deletarPerfil = new DeletarPerfil();
@@ -38,6 +36,21 @@ public class ClienteController {
             if (cliente == null) {
                 clienteDao.SaveCliente(c);
                 JOptionPane.showMessageDialog(null, "Dados Cadastrados!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Cpf já cadastrado!");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro! Dados inválidos!\n" + e.getMessage());
+        }
+    }
+    public void AtualizaClienteReserva(Cliente c) {
+        try {
+            cliente = this.Consulta(c.getCpf());
+            if (cliente != null) {
+                em.detach(cliente);
+                cliente = c;
+                clienteDao.AtualizaCliente(c);
+                JOptionPane.showMessageDialog(null, "Reserva Cadastrada!");
             } else {
                 JOptionPane.showMessageDialog(null, "Cpf já cadastrado!");
             }

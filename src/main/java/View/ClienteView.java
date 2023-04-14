@@ -168,6 +168,9 @@ public class ClienteView extends javax.swing.JFrame {
         System.out.println("+++++CV+++++");
         exibe();
         System.out.println("-----CV-----");
+        ReservaSolicita reservaSolicita = new ReservaSolicita();
+        reservaSolicita.setVisible(true);
+        reservaSolicita.RecebeDadosLog(cliente);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
