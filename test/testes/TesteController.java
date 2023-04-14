@@ -8,7 +8,6 @@ package testes;
 import main.java.Controller.ClienteController;
 import main.java.model.Cliente;
 import main.java.model.Reserva;
-import main.java.resources.conversor.Conversor;
 
 /**
  *
@@ -24,12 +23,10 @@ public class TesteController {
         String dataFini = "07/02/2026";
         String hora = "20:30";
         try {
-            reserva.setDataInicial(Conversor.ConversorData(dataIni));
-            reserva.setDataFinal(Conversor.ConversorData(dataFini));
-            reserva.setHoraEntrada(Conversor.ConversorHora(hora));
+            
             reserva.setStatus("pendente");
             reserva.setValorDiaria(40);
-            clienteController.ClienteReserva();
+            
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

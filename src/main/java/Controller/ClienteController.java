@@ -10,7 +10,6 @@ import javax.swing.JOptionPane;
 import main.java.ConnectionFactory.ConnectionFactory;
 import main.java.DAO.ClienteDao;
 import main.java.View.CadastroCliente;
-import main.java.View.CadastroReserva;
 import main.java.View.ClienteView;
 import main.java.View.DeletarPerfil;
 import main.java.View.EditarPerfil;
@@ -31,7 +30,6 @@ public class ClienteController {
     private final ClienteView clienteView = new ClienteView();
     private final DeletarPerfil deletarPerfil = new DeletarPerfil();
     private final CadastroCliente cadastroCliente = null;
-    private final CadastroReserva cadastroReserva = null;
     private static int cpf;
 
     public void CadastrarCliente(Cliente c) {
@@ -86,27 +84,6 @@ public class ClienteController {
             this.deletarPerfil.fecha();
         } catch (Exception e) {
             this.deletarPerfil.Erro(e);
-        }
-    }
-
-    public void ClienteReserva(Cliente c) {
-        try {
-            cliente = this.Consulta(c.getCpf());
-            reserva = cliente.getReserva();
-            if (reserva == null) {
-                em.detach(cliente);
-                reserva.setDataInicial(CadastroReserva.getDataInicial());
-                reserva.setStatus("pendente");
-                reserva.setDataFinal(CadastroReserva.getDataFinal());
-                reserva.setHoraEntrada(CadastroReserva.getHora());
-                reserva.setCliente(cliente);
-                cliente.setReserva(reserva);
-                clienteDao.AtualizaCliente(cliente);
-                cadastroReserva.ReservaSalva();
-                clienteView.recebeCliente(cliente);
-            }
-        } catch (Exception e) {
-            cadastroReserva.Erro();
         }
     }
 

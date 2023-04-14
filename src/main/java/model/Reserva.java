@@ -6,6 +6,8 @@
 package main.java.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import javax.persistence.*;
 
 /**
@@ -20,11 +22,11 @@ public class Reserva implements Serializable {
     @Column
     private int id;
     @Column
-    private String dataInicial;
+    private LocalDate dataInicial;
     @Column
-    private String dataFinal;
+    private LocalDate dataFinal;
     @Column
-    private String horaEntrada;
+    private LocalTime horaEntrada;
     @Column
     private String status;
     @Column
@@ -38,7 +40,7 @@ public class Reserva implements Serializable {
     public Reserva() {
     }
 
-    public Reserva(String dataInicial, String dataFinal, String horaEntrada, String status, double valorDiaria, Cliente cliente) {
+    public Reserva(LocalDate dataInicial, LocalDate dataFinal, LocalTime horaEntrada, String status, double valorDiaria, Cliente cliente) {
         this.dataInicial = dataInicial;
         this.dataFinal = dataFinal;
         this.horaEntrada = horaEntrada;
@@ -53,30 +55,6 @@ public class Reserva implements Serializable {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getDataInicial() {
-        return dataInicial;
-    }
-
-    public void setDataInicial(String dataInicial) {
-        this.dataInicial = dataInicial;
-    }
-
-    public String getDataFinal() {
-        return dataFinal;
-    }
-
-    public void setDataFinal(String dataFinal) {
-        this.dataFinal = dataFinal;
-    }
-
-    public String getHoraEntrada() {
-        return horaEntrada;
-    }
-
-    public void setHoraEntrada(String horaEntrada) {
-        this.horaEntrada = horaEntrada;
     }
 
     public String getStatus() {
@@ -101,6 +79,30 @@ public class Reserva implements Serializable {
 
     public void setValorTotalDiaria(double valorTotalDiaria) {
         this.valorTotalDiaria = valorTotalDiaria;
+    }
+
+    public LocalDate getDataInicial() {
+        return dataInicial;
+    }
+
+    public void setDataInicial(LocalDate dataInicial) {
+        this.dataInicial = dataInicial;
+    }
+
+    public LocalDate getDataFinal() {
+        return dataFinal;
+    }
+
+    public void setDataFinal(LocalDate dataFinal) {
+        this.dataFinal = dataFinal;
+    }
+
+    public LocalTime getHoraEntrada() {
+        return horaEntrada;
+    }
+
+    public void setHoraEntrada(LocalTime horaEntrada) {
+        this.horaEntrada = horaEntrada;
     }
 
     public Cliente getCliente() {

@@ -5,8 +5,6 @@
  */
 package testes;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import javax.persistence.EntityManager;
 import main.java.ConnectionFactory.ConnectionFactory;
 import main.java.DAO.ClienteDao;
@@ -28,8 +26,6 @@ public class TesteAtualizaCliente {
         try {
             cliente = clienteDao.findById(679);
             em.detach(cliente);
-            reserva.setDataInicial(LocalDate.now());
-            reserva.setHoraEntrada(LocalTime.now());
             reserva.setStatus("aprovada");
             reserva.setValorTotalDiaria(40);
             reserva.setValorDiaria(40);
