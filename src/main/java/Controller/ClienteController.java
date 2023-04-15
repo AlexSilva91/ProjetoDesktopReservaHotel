@@ -9,11 +9,13 @@ import javax.persistence.EntityManager;
 import javax.swing.JOptionPane;
 import main.java.ConnectionFactory.ConnectionFactory;
 import main.java.DAO.ClienteDao;
+import main.java.DAO.ReservaDao;
 import main.java.View.CadastroCliente;
 import main.java.View.ClienteView;
 import main.java.View.DeletarPerfil;
 import main.java.View.EditarPerfil;
 import main.java.model.Cliente;
+import main.java.model.Reserva;
 
 /**
  *
@@ -23,6 +25,7 @@ public class ClienteController {
 
     private final EntityManager em = ConnectionFactory.getConnection();
     private final ClienteDao clienteDao = new ClienteDao();
+    private final ReservaDao reservaDao = new ReservaDao();
     private static Cliente cliente = new Cliente();
     private final EditarPerfil editarPerfil = new EditarPerfil();
     private final ClienteView clienteView = new ClienteView();
@@ -43,6 +46,7 @@ public class ClienteController {
             JOptionPane.showMessageDialog(null, "Erro! Dados inválidos!\n" + e.getMessage());
         }
     }
+
     public void AtualizaClienteReserva(Cliente c) {
         try {
             cliente = this.Consulta(c.getCpf());
@@ -91,7 +95,11 @@ public class ClienteController {
 
     public void deletaCliente(int cpf) {
         cliente = Consulta(cpf);
+        Reserva r = reservaDao.ConReserv(cpf);
         try {
+            if (r == null) {
+                reservaDao.removeReserva(r.getId());
+            }
             this.clienteDao.removeCliente(cliente.getCpf());
             this.deletarPerfil.Exibe();
             this.deletarPerfil.fecha();

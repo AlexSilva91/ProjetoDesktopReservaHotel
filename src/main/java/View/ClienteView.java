@@ -143,6 +143,11 @@ public class ClienteView extends javax.swing.JFrame {
         jMenu2.add(jMenuItem4);
 
         jMenuItem5.setText("Minhas reservas");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem5);
 
         jMenuBar1.add(jMenu2);
@@ -188,6 +193,14 @@ public class ClienteView extends javax.swing.JFrame {
         deletarPerfil.setVisible(true);
         deletarPerfil.RecebeCliente(this.getCliente());
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        exibe();
+        MinhasReservas mr = new MinhasReservas();
+        mr.setVisible(true);
+        mr.RecebeCliente(cliente);
+        mr.preecherTabela();
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -28,16 +28,14 @@ public class ClienteDao {
             this.em.getTransaction().rollback();
             e.getMessage();
         }
-        
+
     }
 
-    public List<Cliente> ConsultCliente(int id) {
-        String jpql = "select c from Cliente as c where c.id =:id";
-        Query q;
-        List<Cliente> list;
-        q = em.createQuery(jpql, Cliente.class);
-        q.setParameter("id", id);
-        return list = q.getResultList();
+    public List<Cliente> ConsultCliente() {
+        String jpql = "from Cliente c";
+        Query q = em.createQuery(jpql, Cliente.class);
+        List<Cliente> list = q.getResultList();
+        return list;
     }
 
     public Cliente findById(int id) {

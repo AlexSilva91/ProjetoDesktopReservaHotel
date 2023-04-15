@@ -25,15 +25,34 @@ public class ReservaDao {
         this.em.getTransaction().commit();
     }
 
-    public List<Reserva> ConsultaReserva(int id) {
-        String jpql = "select r from Reserva as r where r.id =:id";
-        Query q = null;
-        List<Reserva> list;
-        q = em.createQuery(jpql, Reserva.class);
-        q.setParameter("id", id);
-        return list = q.getResultList();
+    public List<Reserva> ConsultaReserva() {
+        String jpql = "FROM Reserva r";
+        Query q = em.createQuery(jpql, Reserva.class);
+        List<Reserva> list = q.getResultList();
+        return list;
     }
-    public Reserva findById(int id){
+
+    public Reserva ConReserv(int id) {
+        Query q = em.createQuery("SELECT r FROM Reserva as r where r.cliente.cpf =:id", Reserva.class)
+                .setParameter("id", id);
+        Reserva r = (Reserva) q.getSingleResult();
+        return r;
+    }
+    public Reserva BuscaQuarto(int cod) {
+        Query q = em.createQuery("SELECT r FROM Reserva as r where r.quarto =:cod", Reserva.class)
+                .setParameter("cod", cod);
+        Reserva r = (Reserva) q.getSingleResult();
+        return r;
+    }
+
+    public List<Reserva> Resevas(int id) {
+        Query q = em.createQuery("SELECT r FROM Reserva as r where r.cliente.cpf =:id", Reserva.class)
+                .setParameter("id", id);
+        List<Reserva> r = q.getResultList();
+        return r;
+    }
+
+    public Reserva findById(int id) {
         return em.find(Reserva.class, id);
     }
 

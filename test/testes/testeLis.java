@@ -5,25 +5,20 @@
  */
 package testes;
 
-import javax.persistence.EntityNotFoundException;
 import main.java.DAO.ClienteDao;
-import main.java.model.Cliente;
+import main.java.DAO.ReservaDao;
+import main.java.model.Reserva;
 
 /**
  *
  * @author HP - 4300
  */
-public class TesteRemoveReserva {
-    
+public class testeLis {
+
     public static void main(String[] args) {
+        ReservaDao dao = new ReservaDao();
         ClienteDao cd = new ClienteDao();
-        Cliente c;
-        try {
-            cd.removeCliente(12);
-            System.out.println("\nPronto!");
-        } catch (EntityNotFoundException e) {
-            System.out.println("Usuário não existe!");
-        }
+        Reserva r = dao.ConReserv(12);
+        System.out.println("\nData Inicial: "+r.getHoraEntrada());
     }
-    
 }

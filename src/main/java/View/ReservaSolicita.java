@@ -26,6 +26,7 @@ public class ReservaSolicita extends javax.swing.JFrame {
     public ReservaSolicita() {
         initComponents();
         client = new Cliente();
+        this.setDefaultCloseOperation(0);
     }
 
     /**

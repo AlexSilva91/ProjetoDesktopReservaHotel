@@ -12,6 +12,7 @@ import main.java.DAO.ReservaDao;
 import main.java.model.Cliente;
 import main.java.model.Reserva;
 import main.java.resources.conversor.Conversor;
+import main.java.resources.conversor.Gerador;
 
 /**
  *
@@ -22,6 +23,7 @@ public class TesteReserva {
     public static void main(String[] args) {
         EntityManager em = ConnectionFactory.getConnection();
         ReservaDao reservaDao = new ReservaDao();
+        Gerador gerador = new Gerador();
 
         try {
             Reserva reserva = new Reserva();
@@ -30,9 +32,8 @@ public class TesteReserva {
             reserva.setDataFinal(Conversor.ConversorData("21/06/2040"));
             reserva.setHoraEntrada(Conversor.ConversorHora("14:30"));
             reserva.setValorDiaria(50);
-            reserva.setValorTotalDiaria(50);
             Cliente cliente = new Cliente();
-            cliente = new Cliente(12, "Joana", "joana9164@gmail.com", "981469865", reserva);
+            cliente = new Cliente(123, "Alex", "alexalves9164@gmail.com", "981469865", reserva);
 
             reserva.setCliente(cliente);
             reservaDao.SaveReserva(reserva);

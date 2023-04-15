@@ -33,19 +33,12 @@ public class Cliente implements Serializable {
     @JoinColumn
     private Reserva reserva;
 
-    public Reserva getReserva() {
-        return reserva;
-    }
-
-    public void setReserva(Reserva reserva) {
-        this.reserva = reserva;
-    }
-
     public Cliente(String nome, String email, String telefone) {
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
     }
+
     public Cliente(int cpf, String nome, String email, String telefone) {
         this.cpf = cpf;
         this.nome = nome;
@@ -53,15 +46,23 @@ public class Cliente implements Serializable {
         this.telefone = telefone;
     }
 
-    public Cliente() {
-
-    }
-
     public Cliente(int cpf, String nome, String email, String telefone, Reserva reserva) {
         this.cpf = cpf;
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
+        this.reserva = reserva;
+    }
+    
+    public Cliente() {
+
+    }
+
+    public Reserva getReserva() {
+        return reserva;
+    }
+
+    public void setReserva(Reserva reserva) {
         this.reserva = reserva;
     }
 
