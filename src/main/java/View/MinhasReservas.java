@@ -24,8 +24,8 @@ import org.jdesktop.observablecollections.ObservableCollections;
 public class MinhasReservas extends javax.swing.JFrame {
 
     private static Cliente cliente = new Cliente();
-    private Reserva r;
-    private ClienteController controller;
+    private final Reserva r;
+    private final ClienteController controller;
 
     /**
      * Creates new form MinhasReservas
@@ -48,7 +48,7 @@ public class MinhasReservas extends javax.swing.JFrame {
     private void initComponents() {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
-        listaReservas = ObservableCollections.observableList(new ArrayList<Reserva>());
+        listaReserva = ObservableCollections.observableList(new ArrayList<Reserva>());
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -61,9 +61,11 @@ public class MinhasReservas extends javax.swing.JFrame {
         btnVoltar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TabelaReserva = new javax.swing.JTable();
+        tabelaReserva = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Minhas Reservas");
+        setResizable(false);
 
         jLabel1.setText("Chegada:");
 
@@ -163,63 +165,51 @@ public class MinhasReservas extends javax.swing.JFrame {
                 .addContainerGap(46, Short.MAX_VALUE))
         );
 
-        TabelaReserva.setAutoCreateRowSorter(true);
-        TabelaReserva.setAlignmentX(50.0F);
-        TabelaReserva.setAlignmentY(50.0F);
-        TabelaReserva.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        TabelaReserva.setName(""); // NOI18N
+        tabelaReserva.getTableHeader().setReorderingAllowed(false);
 
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, listaReservas, TabelaReserva);
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, listaReserva, tabelaReserva);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${id}"));
         columnBinding.setColumnName("Id");
         columnBinding.setColumnClass(Integer.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${dataInicial}"));
         columnBinding.setColumnName("Data Inicial");
         columnBinding.setColumnClass(java.time.LocalDate.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${horaEntrada}"));
-        columnBinding.setColumnName("Hora Entrada");
-        columnBinding.setColumnClass(java.time.LocalTime.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${dataFinal}"));
         columnBinding.setColumnName("Data Final");
         columnBinding.setColumnClass(java.time.LocalDate.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${horaEntrada}"));
+        columnBinding.setColumnName("Hora Entrada");
+        columnBinding.setColumnClass(java.time.LocalTime.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${status}"));
         columnBinding.setColumnName("Status");
         columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${valorDiaria}"));
-        columnBinding.setColumnName("Valor Diaria");
-        columnBinding.setColumnClass(Double.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${quarto}"));
         columnBinding.setColumnName("Quarto");
         columnBinding.setColumnClass(Integer.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${valorDiaria}"));
+        columnBinding.setColumnName("Valor Diaria");
+        columnBinding.setColumnClass(Double.class);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
-        TabelaReserva.addMouseListener(new java.awt.event.MouseAdapter() {
+        tabelaReserva.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TabelaReservaMouseClicked(evt);
+                tabelaReservaMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(TabelaReserva);
-        if (TabelaReserva.getColumnModel().getColumnCount() > 0) {
-            TabelaReserva.getColumnModel().getColumn(0).setPreferredWidth(8);
-            TabelaReserva.getColumnModel().getColumn(1).setPreferredWidth(10);
-            TabelaReserva.getColumnModel().getColumn(2).setPreferredWidth(10);
-            TabelaReserva.getColumnModel().getColumn(3).setPreferredWidth(10);
-            TabelaReserva.getColumnModel().getColumn(4).setPreferredWidth(20);
-            TabelaReserva.getColumnModel().getColumn(5).setPreferredWidth(10);
-            TabelaReserva.getColumnModel().getColumn(6).setPreferredWidth(10);
-        }
+        jScrollPane1.setViewportView(tabelaReserva);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 654, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -233,7 +223,7 @@ public class MinhasReservas extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 4, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -244,9 +234,9 @@ public class MinhasReservas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        if (TabelaReserva.getSelectedRowCount() == 1) {
-            int indice = TabelaReserva.getSelectedRow();
-            Reserva reserva = listaReservas.get(indice);
+        if (tabelaReserva.getSelectedRowCount() == 1) {
+            int indice = tabelaReserva.getSelectedRow();
+            Reserva reserva = listaReserva.get(indice);
             if (("cancelada").equals(reserva.getStatus()) || ("recusada").equals(reserva.getStatus())) {
                 JOptionPane.showMessageDialog(rootPane, "Opção inválida!");
             } else {
@@ -272,9 +262,9 @@ public class MinhasReservas extends javax.swing.JFrame {
         if (JOptionPane.showConfirmDialog(this, "Deseja realmente cancelar?",
                 "Confirmação", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE)
                 == JOptionPane.YES_OPTION) {
-            if (TabelaReserva.getSelectedRowCount() == 1) {
-                int indice = TabelaReserva.getSelectedRow();
-                Reserva reserva = listaReservas.get(indice);
+            if (tabelaReserva.getSelectedRowCount() == 1) {
+                int indice = tabelaReserva.getSelectedRow();
+                Reserva reserva = listaReserva.get(indice);
                 if (("cancelada").equals(reserva.getStatus()) || ("recusada").equals(reserva.getStatus())) {
                     JOptionPane.showMessageDialog(rootPane, "Opção inválida!");
                 } else {
@@ -288,23 +278,23 @@ public class MinhasReservas extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void TabelaReservaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelaReservaMouseClicked
-        LocalDate date = (LocalDate) TabelaReserva.getValueAt(TabelaReserva.getSelectedRow(), 1);
-        LocalDate said = (LocalDate) TabelaReserva.getValueAt(TabelaReserva.getSelectedRow(), 3);
+    private void tabelaReservaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaReservaMouseClicked
+        LocalDate date = (LocalDate) tabelaReserva.getValueAt(tabelaReserva.getSelectedRow(), 1);
+        LocalDate said = (LocalDate) tabelaReserva.getValueAt(tabelaReserva.getSelectedRow(), 2);
         DateTimeFormatter formatters = DateTimeFormatter.ofPattern("dd/MM/uuuu");
         String chegada = date.format(formatters);
         String saida = said.format(formatters);
         txtChegada.setText(chegada);
-        txtHora.setText(TabelaReserva.getValueAt(TabelaReserva.getSelectedRow(), 2).toString());
+        txtHora.setText(tabelaReserva.getValueAt(tabelaReserva.getSelectedRow(), 3).toString());
         txtSaida.setText(saida);
-    }//GEN-LAST:event_TabelaReservaMouseClicked
+    }//GEN-LAST:event_tabelaReservaMouseClicked
     public void preecherTabela() {
+        listaReserva.clear();
         ReservaController reservaController = new ReservaController();
-        listaReservas.clear();
         List<Reserva> res = reservaController.listAll(cliente.getCpf());
-        for (Reserva r : res) {
-            listaReservas.add(r);
-        }
+        res.forEach((rs) -> {
+            listaReserva.add(rs);
+        });
         System.out.println(cliente.getNome());
     }
 
@@ -344,7 +334,6 @@ public class MinhasReservas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable TabelaReserva;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnVoltar;
@@ -354,7 +343,8 @@ public class MinhasReservas extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private java.util.List<Reserva> listaReservas;
+    private java.util.List<Reserva> listaReserva;
+    private javax.swing.JTable tabelaReserva;
     private javax.swing.JFormattedTextField txtChegada;
     private javax.swing.JFormattedTextField txtHora;
     private javax.swing.JFormattedTextField txtSaida;

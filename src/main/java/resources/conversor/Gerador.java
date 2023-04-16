@@ -15,9 +15,9 @@ import main.java.model.Reserva;
  */
 public class Gerador {
 
-    private final int MAX = 10;
+    private final int MAX = 100;
     private final Random cod = new Random();
-    private int codigo = 0;
+    private static int codigo;
     private ReservaController controller;
 
     public int getCodigo() {
@@ -25,11 +25,11 @@ public class Gerador {
     }
 
     public void setCodigo(int codigo) {
-        this.codigo = codigo;
+        Gerador.codigo = codigo;
     }
 
     public void gerarCodigo() {
-        this.codigo = this.cod.nextInt();
+        Gerador.codigo = this.cod.nextInt(MAX);
     }
 
     public boolean ValidaCod(int cod) {

@@ -5,12 +5,14 @@
  */
 package main.java.View;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import javax.swing.JOptionPane;
 import main.java.Controller.ClienteController;
 import main.java.model.Cliente;
 import main.java.model.Reserva;
 import main.java.resources.conversor.Conversor;
+import main.java.resources.conversor.Gerador;
 
 /**
  *
@@ -181,21 +183,45 @@ public class ReservaSolicita extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         ClienteController clienteController = new ClienteController();
+        Gerador g = new Gerador();
         Cliente cliente = getC();
         Reserva r = new Reserva();
-        r.setDataInicial(Conversor.ConversorData(txtDataInicio.getText()));
-        r.setDataFinal(Conversor.ConversorData(txtDataFim.getText()));
-        r.setHoraEntrada(Conversor.ConversorHora(txtHora.getText()));
-        r.setStatus("pendente");
-        r.setValorDiaria(40);
-        r.setCliente(cliente);
-        cliente.setReserva(r);
-        try {
-            clienteController.AtualizaClienteReserva(cliente);
-            this.dispose();
-        } catch (DateTimeParseException e) {
-            System.out.println(e.getMessage());
-            JOptionPane.showConfirmDialog(rootPane, "Dados Inválidos!");
+        boolean dataMaiorOuIgualAtual, dataInicialMaiorOuigualFinal, dataInicialMenorQueAtual;
+        dataMaiorOuIgualAtual = false;
+        dataInicialMaiorOuigualFinal = false;
+        dataInicialMenorQueAtual = false;
+        LocalDate inicial = Conversor.ConversorData(txtDataInicio.getText());
+        LocalDate fim = Conversor.ConversorData(txtDataFim.getText());
+
+        if (Conversor.DataInicioMaiorQueAtual(inicial)
+                || Conversor.DataInicioIgualAtual(inicial)) {
+            dataMaiorOuIgualAtual = true;
+        }
+        if (Conversor.DataInicMenorQueFinal(inicial, fim)
+                || Conversor.DataInicioIgualFinal(inicial, fim)) {
+            dataInicialMaiorOuigualFinal = true;
+        }
+        if (Conversor.DataInicioMenorQueAtual(inicial)) {
+            dataInicialMenorQueAtual = true;
+        }
+        if (dataInicialMaiorOuigualFinal && dataMaiorOuIgualAtual && !dataInicialMenorQueAtual) {
+            r.setDataInicial(Conversor.ConversorData(txtDataInicio.getText()));
+            r.setDataFinal(Conversor.ConversorData(txtDataFim.getText()));
+            r.setHoraEntrada(Conversor.ConversorHora(txtHora.getText()));
+            r.setStatus("pendente");
+            g.gerarCodigo();
+            r.setQuarto(g.getCodigo());
+            r.setValorDiaria(40);
+            r.setCliente(cliente);
+            cliente.setReserva(r);
+            try {
+                clienteController.AtualizaClienteReserva(cliente);
+                this.dispose();
+            } catch (DateTimeParseException e) {
+                System.out.println(e.getMessage());
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Data inválida!", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
