@@ -5,11 +5,16 @@
  */
 package main.java.View;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
+import main.java.Controller.ClienteController;
 import main.java.Controller.ReservaController;
 import main.java.model.Cliente;
 import main.java.model.Reserva;
+import main.java.resources.conversor.Conversor;
 import org.jdesktop.observablecollections.ObservableCollections;
 
 /**
@@ -20,7 +25,7 @@ public class MinhasReservas extends javax.swing.JFrame {
 
     private static Cliente cliente = new Cliente();
     private Reserva r;
-    private ReservaController reservaController;
+    private ClienteController controller;
 
     /**
      * Creates new form MinhasReservas
@@ -29,7 +34,7 @@ public class MinhasReservas extends javax.swing.JFrame {
         initComponents();
         this.setDefaultCloseOperation(0);
         r = new Reserva();
-        reservaController = new ReservaController();
+        controller = new ClienteController();
         preecherTabela();
     }
 
@@ -159,29 +164,6 @@ public class MinhasReservas extends javax.swing.JFrame {
         );
 
         TabelaReserva.setAutoCreateRowSorter(true);
-        TabelaReserva.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Id", "Data Inicial", "Hora Entrada", "Data Final", "Status", "Valor Diaria", "Quarto"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
         TabelaReserva.setAlignmentX(50.0F);
         TabelaReserva.setAlignmentY(50.0F);
         TabelaReserva.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -211,6 +193,11 @@ public class MinhasReservas extends javax.swing.JFrame {
         columnBinding.setColumnClass(Integer.class);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
+        TabelaReserva.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TabelaReservaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(TabelaReserva);
         if (TabelaReserva.getColumnModel().getColumnCount() > 0) {
             TabelaReserva.getColumnModel().getColumn(0).setPreferredWidth(8);
@@ -257,7 +244,24 @@ public class MinhasReservas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        // TODO add your handling code here:
+        if (TabelaReserva.getSelectedRowCount() == 1) {
+            int indice = TabelaReserva.getSelectedRow();
+            Reserva reserva = listaReservas.get(indice);
+            if (("cancelada").equals(reserva.getStatus()) || ("recusada").equals(reserva.getStatus())) {
+                JOptionPane.showMessageDialog(rootPane, "Opção inválida!");
+            } else {
+                LocalDate inicial = Conversor.ConversorData(txtChegada.getText());
+                LocalDate fim = Conversor.ConversorData(txtSaida.getText());
+                reserva.setDataInicial(inicial);
+                reserva.setDataFinal(fim);
+                reserva.setHoraEntrada(Conversor.ConversorHora(txtHora.getText()));
+                reserva.setCliente(cliente);
+                cliente.setReserva(reserva);
+                controller.AtualizaClienteReserva(cliente);
+                preecherTabela();
+
+            }
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
@@ -265,9 +269,37 @@ public class MinhasReservas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
+        if (JOptionPane.showConfirmDialog(this, "Deseja realmente cancelar?",
+                "Confirmação", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE)
+                == JOptionPane.YES_OPTION) {
+            if (TabelaReserva.getSelectedRowCount() == 1) {
+                int indice = TabelaReserva.getSelectedRow();
+                Reserva reserva = listaReservas.get(indice);
+                if (("cancelada").equals(reserva.getStatus()) || ("recusada").equals(reserva.getStatus())) {
+                    JOptionPane.showMessageDialog(rootPane, "Opção inválida!");
+                } else {
+                    reserva.setStatus("cancelada");
+                    reserva.setCliente(cliente);
+                    cliente.setReserva(reserva);
+                    controller.AtualizaClienteReserva(cliente);
+                    preecherTabela();
+                }
+            }
+        }
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void TabelaReservaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabelaReservaMouseClicked
+        LocalDate date = (LocalDate) TabelaReserva.getValueAt(TabelaReserva.getSelectedRow(), 1);
+        LocalDate said = (LocalDate) TabelaReserva.getValueAt(TabelaReserva.getSelectedRow(), 3);
+        DateTimeFormatter formatters = DateTimeFormatter.ofPattern("dd/MM/uuuu");
+        String chegada = date.format(formatters);
+        String saida = said.format(formatters);
+        txtChegada.setText(chegada);
+        txtHora.setText(TabelaReserva.getValueAt(TabelaReserva.getSelectedRow(), 2).toString());
+        txtSaida.setText(saida);
+    }//GEN-LAST:event_TabelaReservaMouseClicked
     public void preecherTabela() {
+        ReservaController reservaController = new ReservaController();
         listaReservas.clear();
         List<Reserva> res = reservaController.listAll(cliente.getCpf());
         for (Reserva r : res) {
