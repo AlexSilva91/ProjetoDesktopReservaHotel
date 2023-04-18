@@ -12,7 +12,7 @@ import main.java.Controller.ClienteController;
 import main.java.model.Cliente;
 import main.java.model.Reserva;
 import main.java.resources.conversor.Conversor;
-import main.java.resources.conversor.Gerador;
+import main.java.resources.gerador.Gerador;
 
 /**
  *

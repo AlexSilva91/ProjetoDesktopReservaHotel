@@ -6,7 +6,7 @@
 package testes;
 
 import main.java.Controller.ReservaController;
-import main.java.resources.conversor.Gerador;
+import main.java.resources.gerador.Gerador;
 
 /**
  *
