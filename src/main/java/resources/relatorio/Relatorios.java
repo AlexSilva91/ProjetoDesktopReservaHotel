@@ -5,13 +5,16 @@
  */
 package main.java.resources.relatorio;
 
+import java.util.List;
+import main.java.model.Reserva;
+
 /**
  *
  * @author HP - 4300
  */
 public interface Relatorios {
     public void gerarCabecalho();
-    public void gerarCorpo();
+    public void gerarCorpo(List<Reserva> r);
     public void gerarRodape();
     public void imprimir();
 }

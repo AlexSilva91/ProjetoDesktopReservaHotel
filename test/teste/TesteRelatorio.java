@@ -5,7 +5,10 @@
  */
 package teste;
 
+import java.util.List;
+import main.java.Controller.ReservaController;
 import main.java.model.Cliente;
+import main.java.model.Reserva;
 import main.java.resources.relatorio.RelatorioPDF;
 
 /**
@@ -15,9 +18,24 @@ import main.java.resources.relatorio.RelatorioPDF;
 public class TesteRelatorio {
 
     public static void main(String[] args) {
-        Cliente cliente = new Cliente(123,"Alex Da Silva Alves", "Alex@gmail.com", "1221");
-        RelatorioPDF dF = new RelatorioPDF(cliente);
+        ReservaController controller = new ReservaController();
+        Cliente cliente = new Cliente(123, "Alex", "alexalves9164@gmail.com", "1221");
+
+        List<Reserva> rs = controller.listAll(123);
+
+        RelatorioPDF dF = new RelatorioPDF(cliente, "ret.pdf");
         dF.gerarCabecalho();
+        dF.gerarCorpo(rs);
+        dF.gerarRodape();
         dF.imprimir();
+        for (Reserva r : rs) {
+            System.out.println("\n");
+            System.out.println(r.getDataInicial());
+            System.out.println(r.getDataFinal());
+            System.out.println(r.getHoraEntrada());
+            System.out.println(r.getQuarto());
+            System.out.println(r.getStatus());
+            System.out.println(r.getValorDiaria());
+        }
     }
 }
