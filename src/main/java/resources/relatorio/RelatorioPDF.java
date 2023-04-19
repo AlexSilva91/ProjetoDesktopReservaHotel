@@ -9,6 +9,7 @@ import com.lowagie.text.Chunk;
 import com.lowagie.text.Document;
 import com.lowagie.text.Element;
 import com.lowagie.text.Font;
+import com.lowagie.text.PageSize;
 import com.lowagie.text.Paragraph;
 import com.lowagie.text.pdf.PdfWriter;
 import java.io.FileNotFoundException;
@@ -33,7 +34,7 @@ public class RelatorioPDF implements Relatorios {
 
     public RelatorioPDF(Cliente cliente, String nome) {
         this.cliente = cliente;
-        this.document = new Document();
+        this.document = new Document(PageSize.A4, 50, 50, 70, 70);
         try {
             PdfWriter.getInstance(document, new FileOutputStream(caminhoRelatorio + nome));
             this.document.open();
@@ -44,12 +45,16 @@ public class RelatorioPDF implements Relatorios {
 
     @Override
     public void gerarCabecalho() {
-
+        this.document.setMargins(50, 50, 70, 70);
+        this.document.setMarginMirroring(true);
         Paragraph paragraphPulaLinha = new Paragraph();
         paragraphPulaLinha.setAlignment(Element.ALIGN_CENTER);
         paragraphPulaLinha.add(new Chunk(
                 "\n--------------------------------------------------------------------------------",
                 new Font(Font.TIMES_ROMAN, 14)));
+
+        Paragraph p = new Paragraph(new Chunk("------------------", new Font(Font.TIMES_ROMAN, 14)));
+        p.setAlignment(Element.ALIGN_CENTER);
 
         Paragraph paragraphTitulo = new Paragraph();
         paragraphTitulo.setAlignment(Element.ALIGN_CENTER);
@@ -63,12 +68,12 @@ public class RelatorioPDF implements Relatorios {
         Paragraph paragraphData = new Paragraph();
         paragraphData.setAlignment(Element.ALIGN_CENTER);
         paragraphData.add(new Chunk(
-                "Data de emissão: " + Conversor.conversorData(LocalDate.now()),
+                "Data de emissão: " + Conversor.conversorData(LocalDate.now()) + "\n",
                 new Font(Font.TIMES_ROMAN, 16)));
         this.document.add(paragraphData);
 
-        this.document.add(new Paragraph("\n"));
         this.document.add(paragraphPulaLinha);
+        this.document.add(p);
 
         Paragraph paragraphCliente = new Paragraph();
         paragraphCliente.setAlignment(Element.ALIGN_CENTER);
@@ -86,50 +91,45 @@ public class RelatorioPDF implements Relatorios {
                 new Font(Font.TIMES_ROMAN, 12)));
         this.document.add(paragraphCliente);
 
+        this.document.add(p);
         this.document.add(paragraphPulaLinha);
     }
 
     @Override
     public void gerarCorpo(List<Reserva> r) {
+        this.document.setMargins(50, 50, 70, 70);
+        this.document.setMarginMirroring(true);
         Paragraph paragraphTituloCorpo = new Paragraph(new Chunk(
-                "Reservas", new Font(Font.TIMES_ROMAN, 14)));
+                "Reservas\n", new Font(Font.TIMES_ROMAN, 14)));
         paragraphTituloCorpo.setAlignment(Element.ALIGN_CENTER);
         this.document.add(paragraphTituloCorpo);
 
         Paragraph paragraphCorpo = new Paragraph();
-        paragraphCorpo.setAlignment(Element.ALIGN_CENTER);
-
+        paragraphCorpo.setAlignment(Element.ALIGN_JUSTIFIED);
+        double total = 0;
         for (int i = 0; i < r.size(); i++) {
             Reserva reserva = r.get(i);
-            paragraphCorpo.add(new Chunk("\n"));
-            paragraphCorpo.add(new Chunk("Data inicial da reserva: "
-                    + Conversor.conversorData(reserva.getDataInicial()),
-                    new Font(Font.TIMES_ROMAN, 12)));
-            paragraphCorpo.add(new Chunk(""));
-            paragraphCorpo.add(new Chunk("\nHora de entrada: " + reserva.getHoraEntrada(),
-                    new Font(Font.TIMES_ROMAN, 12)));
-            paragraphCorpo.add(new Chunk(""));
-            paragraphCorpo.add(new Chunk("\nData final da reserva: "
-                    + Conversor.conversorData(reserva.getDataFinal()),
-                    new Font(Font.TIMES_ROMAN, 12)));
-            paragraphCorpo.add(new Chunk(""));
-            paragraphCorpo.add(new Chunk("\nDiária: R$ " + reserva.getValorDiaria(),
-                    new Font(Font.TIMES_ROMAN, 12)));
-            paragraphCorpo.add(new Chunk(""));
-            paragraphCorpo.add(new Chunk("\nQuarto: " + reserva.getQuarto(),
-                    new Font(Font.TIMES_ROMAN, 12)));
-            paragraphCorpo.add(new Chunk(""));
-            paragraphCorpo.add(new Chunk("\nStatus: " + reserva.getStatus(),
-                    new Font(Font.TIMES_ROMAN, 12)));
-            paragraphCorpo.add(new Chunk("\n"));
-            this.document.add(new Paragraph("\n"));
-            this.document.add(paragraphCorpo);
+            total += reserva.getValorDiaria();
+            paragraphCorpo.add(new Chunk(
+                    "Data de entrada: " + Conversor.conversorData(reserva.getDataInicial())
+                    + "\nData de saída: " + Conversor.conversorData(reserva.getDataInicial())
+                    + "\nHora de entrada: " + reserva.getHoraEntrada()
+                    + "\nStatus: " + reserva.getStatus()
+                    + "\nQuarto: " + reserva.getQuarto()
+                    + "\nValor da diária: " + reserva.getValorDiaria() + "\n\n", new Font(Font.TIMES_ROMAN, 12)));
         }
+        this.document.add(paragraphCorpo);
+        Paragraph paragraphTotal = new Paragraph(new Chunk(
+                "Valor total: R$" + total, new Font(Font.BOLD, 14)));
+        paragraphTotal.setAlignment(Element.ALIGN_RIGHT);
+        this.document.add(paragraphTotal);
 
     }
 
     @Override
     public void gerarRodape() {
+        this.document.setMargins(50, 50, 70, 70);
+        this.document.setMarginMirroring(true);
         Paragraph paragraphPulaLinha = new Paragraph();
         paragraphPulaLinha.setAlignment(Element.ALIGN_CENTER);
         paragraphPulaLinha.add(new Chunk(

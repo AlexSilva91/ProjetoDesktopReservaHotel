@@ -6,6 +6,7 @@
 package teste;
 
 import java.util.List;
+import main.java.Controller.ClienteController;
 import main.java.Controller.ReservaController;
 import main.java.model.Cliente;
 import main.java.model.Reserva;
@@ -19,11 +20,12 @@ public class TesteRelatorio {
 
     public static void main(String[] args) {
         ReservaController controller = new ReservaController();
-        Cliente cliente = new Cliente(123, "Alex", "alexalves9164@gmail.com", "1221");
+        ClienteController cc = new ClienteController();
+        Cliente cliente = cc.Consulta(123);
 
         List<Reserva> rs = controller.listAll(123);
 
-        RelatorioPDF dF = new RelatorioPDF(cliente, "ret.pdf");
+        RelatorioPDF dF = new RelatorioPDF(cliente, "relatorio.pdf");
         dF.gerarCabecalho();
         dF.gerarCorpo(rs);
         dF.gerarRodape();
@@ -37,5 +39,6 @@ public class TesteRelatorio {
             System.out.println(r.getStatus());
             System.out.println(r.getValorDiaria());
         }
+        System.out.println(cliente.getNome());
     }
 }
