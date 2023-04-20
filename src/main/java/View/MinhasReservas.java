@@ -95,6 +95,7 @@ public class MinhasReservas extends javax.swing.JFrame {
         txtSaida.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         btnEditar.setBackground(new java.awt.Color(255, 153, 0));
+        btnEditar.setForeground(new java.awt.Color(255, 255, 255));
         btnEditar.setText("Editar");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,6 +104,7 @@ public class MinhasReservas extends javax.swing.JFrame {
         });
 
         btnCancelar.setBackground(new java.awt.Color(204, 0, 0));
+        btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,6 +113,7 @@ public class MinhasReservas extends javax.swing.JFrame {
         });
 
         btnVoltar.setBackground(new java.awt.Color(51, 51, 51));
+        btnVoltar.setForeground(new java.awt.Color(255, 255, 255));
         btnVoltar.setText("Voltar");
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -123,7 +126,7 @@ public class MinhasReservas extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(86, 86, 86)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
@@ -137,12 +140,12 @@ public class MinhasReservas extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtChegada, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGap(86, 86, 86)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
                     .addComponent(btnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(86, 86, 86))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -240,16 +243,33 @@ public class MinhasReservas extends javax.swing.JFrame {
             if (("cancelada").equals(reserva.getStatus()) || ("recusada").equals(reserva.getStatus())) {
                 JOptionPane.showMessageDialog(rootPane, "Opção inválida!");
             } else {
+                boolean dataMaiorOuIgualAtual = false;
+                boolean dataInicialMaiorOuigualFinal = false;
+                boolean dataInicialMenorQueAtual = false;
                 LocalDate inicial = Conversor.ConversorData(txtChegada.getText());
                 LocalDate fim = Conversor.ConversorData(txtSaida.getText());
-                reserva.setDataInicial(inicial);
-                reserva.setDataFinal(fim);
-                reserva.setHoraEntrada(Conversor.ConversorHora(txtHora.getText()));
-                reserva.setCliente(cliente);
-                cliente.setReserva(reserva);
-                controller.AtualizaClienteReserva(cliente);
-                preecherTabela();
-
+                if (Conversor.DataInicioMaiorQueAtual(inicial)
+                        || Conversor.DataInicioIgualAtual(inicial)) {
+                    dataMaiorOuIgualAtual = true;
+                }
+                if (Conversor.DataInicMenorQueFinal(inicial, fim)
+                        || Conversor.DataInicioIgualFinal(inicial, fim)) {
+                    dataInicialMaiorOuigualFinal = true;
+                }
+                if (Conversor.DataInicioMenorQueAtual(inicial)) {
+                    dataInicialMenorQueAtual = true;
+                }
+                if (dataInicialMaiorOuigualFinal && dataMaiorOuIgualAtual && !dataInicialMenorQueAtual) {
+                    reserva.setDataInicial(inicial);
+                    reserva.setDataFinal(fim);
+                    reserva.setHoraEntrada(Conversor.ConversorHora(txtHora.getText()));
+                    reserva.setCliente(cliente);
+                    cliente.setReserva(reserva);
+                    controller.AtualizaClienteReserva(cliente);
+                    preecherTabela();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Data inválida!", "Erro", JOptionPane.ERROR_MESSAGE);
+                }
             }
         }
     }//GEN-LAST:event_btnEditarActionPerformed

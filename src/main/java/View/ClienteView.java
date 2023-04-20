@@ -90,7 +90,7 @@ public class ClienteView extends javax.swing.JFrame {
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 277, Short.MAX_VALUE)
+            .addGap(0, 273, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -104,8 +104,10 @@ public class ClienteView extends javax.swing.JFrame {
             .addComponent(jDesktopPane1)
         );
 
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/View/img/user_suit.png"))); // NOI18N
         jMenu1.setText("Perfil");
 
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/View/img/icons8-ponta-do-lápis-16.png"))); // NOI18N
         jMenuItem1.setText("Editar");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,6 +116,7 @@ public class ClienteView extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem1);
 
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/View/img/icons8-excluir-18.png"))); // NOI18N
         jMenuItem2.setText("Deletar");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,6 +125,7 @@ public class ClienteView extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem2);
 
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/View/img/icons8-sair-20.png"))); // NOI18N
         jMenuItem3.setText("Sair");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -132,8 +136,10 @@ public class ClienteView extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/View/img/icons-reserva-20.png"))); // NOI18N
         jMenu2.setText("Reserva");
 
+        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/View/img/icons8-reserva-20.png"))); // NOI18N
         jMenuItem4.setText("Solicitar Reserva");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -142,6 +148,7 @@ public class ClienteView extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem4);
 
+        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/View/img/icon-reserva-20.png"))); // NOI18N
         jMenuItem5.setText("Minhas reservas");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
