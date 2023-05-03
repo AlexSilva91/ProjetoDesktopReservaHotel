@@ -18,40 +18,18 @@ public class AdmDao {
     private final EntityManager em = ConnectionFactory.getConnection();
 
     public void SaveUser(Adm adm) {
-
         this.em.getTransaction().begin();
-        this.em.persist(adm);
-        this.em.getTransaction().commit();
-        this.em.getTransaction().rollback();
+        try {
+            this.em.persist(adm);
+            this.em.getTransaction().commit();
+        } catch (Exception e) {
+            this.em.getTransaction().rollback();
+        }
         this.em.close();
 
     }
-
-    /*    public List<Cliente> ConsultCliente(int id) {
-        String jpql = "select c from Cliente as c where c.id =:id";
-        Query q;
-        List<Cliente> list;
-        q = em.createQuery(jpql, Reserva.class);
-        q.setParameter("id", id);
-        return list = q.getResultList();
-
-    }*/
-    public Adm findById(int id) {
+   public Adm findById(int id) {
         return this.em.find(Adm.class, id);
     }
 
-    public void removeCliente(int adm_id) {
-        Adm adm = this.em.getReference(Adm.class, adm_id);
-        this.em.getTransaction().begin();
-        adm = this.em.merge(adm);
-        this.em.remove(adm);
-        this.em.getTransaction().commit();
-    }
-
-    public void AtualizaCliente(Adm adm) {
-        this.em.getTransaction().begin();
-        this.em.merge(adm);
-        this.em.getTransaction().commit();
-
-    }
 }

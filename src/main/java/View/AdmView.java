@@ -16,6 +16,7 @@ public class AdmView extends javax.swing.JFrame {
      */
     public AdmView() {
         initComponents();
+        this.setDefaultCloseOperation(0);
     }
 
     public void fecha() {
@@ -98,6 +99,11 @@ public class AdmView extends javax.swing.JFrame {
 
         jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/View/img/icons8-sobre-20.png"))); // NOI18N
         jMenuItem5.setText("Sistema");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem5);
 
         jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/View/img/icons8-sair-20.png"))); // NOI18N
@@ -143,6 +149,11 @@ public class AdmView extends javax.swing.JFrame {
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
        fecha();
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        Sobre sobre = new Sobre();
+        sobre.setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
      * @param args the command line arguments

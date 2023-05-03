@@ -18,7 +18,7 @@ import javax.persistence.ManyToOne;
  * @author HP - 4300
  */
 @Entity
-public class Cliente implements Serializable {
+public class Cliente extends UsuarioAbstrato implements Serializable {
 
     @Id
     @Column
@@ -58,42 +58,58 @@ public class Cliente implements Serializable {
 
     }
 
+    /**
+     *
+     * @return
+     */
     public Reserva getReserva() {
         return reserva;
     }
 
+    /**
+     *
+     * @param reserva
+     */
     public void setReserva(Reserva reserva) {
         this.reserva = reserva;
     }
 
+    @Override
     public String getNome() {
         return nome;
     }
 
+    @Override
     public void setNome(String nome) {
         this.nome = nome;
     }
 
+    @Override
     public String getEmail() {
         return email;
     }
 
+    @Override
     public void setEmail(String email) {
         this.email = email;
     }
 
+    @Override
     public String getTelefone() {
         return telefone;
     }
 
+    @Override
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
 
+    @Override
     public int getCpf() {
         return cpf;
     }
 
+    @Override
     public void setCpf(int cpf) {
         this.cpf = cpf;
     }

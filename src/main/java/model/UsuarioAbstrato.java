@@ -5,62 +5,58 @@
  */
 package main.java.model;
 
-import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
 /**
  *
  * @author HP - 4300
  */
-@Entity
-public class Adm extends UsuarioAbstrato implements Serializable {
-    @Column
-    private String nome;
-    @Id
+public abstract class UsuarioAbstrato {
+
     private int cpf;
-    @Column
+    private String nome;
     private String email;
+    private String telefone;
+    private Reserva reserva;
 
-    public Adm() {
-
-    }
-
-    public Adm(int cpf, String nome, String email) {
+    public UsuarioAbstrato(int cpf, String nome, String email, String telefone) {
         this.cpf = cpf;
         this.nome = nome;
         this.email = email;
+        this.telefone = telefone;
     }
 
-    @Override
+    public UsuarioAbstrato() {
+    }
+
     public int getCpf() {
         return cpf;
     }
 
-    @Override
+    public void setCpf(int cpf) {
+        this.cpf = cpf;
+    }
+
     public String getNome() {
         return nome;
     }
 
-    @Override
     public void setNome(String nome) {
         this.nome = nome;
     }
 
-    @Override
     public String getEmail() {
         return email;
     }
 
-    @Override
     public void setEmail(String email) {
         this.email = email;
     }
 
-    @Override
-    public void setCpf(int cpf) {
-        this.cpf = cpf;
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 
 }

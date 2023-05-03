@@ -6,9 +6,12 @@
 package main.java.View;
 
 import javax.swing.JOptionPane;
+import main.java.Controller.AdmController;
 import main.java.Controller.ClienteController;
 import main.java.Controller.LoginController;
+import main.java.model.Adm;
 import main.java.model.Cliente;
+import main.java.model.UsuarioAbstrato;
 
 /**
  *
@@ -18,6 +21,7 @@ public class Login extends javax.swing.JFrame {
 
     private final LoginController controller = new LoginController();
     private final ClienteController clienteController = new ClienteController();
+    private final AdmController admController = new AdmController();
 
     private Cliente c = new Cliente();
 
@@ -139,15 +143,26 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         ClienteView clienteView = new ClienteView();
+        UsuarioAbstrato usuarioAbstrato;
+
         try {
-            if (controller.checkLogin(this.txtEmail.getText(), Integer.parseInt(new String(txtSenha.getPassword())))) {
+            usuarioAbstrato = controller.checaInstancia(Integer.parseInt(new String(txtSenha.getPassword())));
 
-                this.Entrar();
+            if (usuarioAbstrato instanceof Cliente) {
+                if (controller.checkLogin(this.txtEmail.getText(), Integer.parseInt(new String(txtSenha.getPassword())))) {
 
-                c = clienteController.Consulta(Integer.parseInt(new String(txtSenha.getPassword())));
-                clienteView.recebeCPF(c);
+                    this.Entrar();
 
+                    c = clienteController.Consulta(Integer.parseInt(new String(txtSenha.getPassword())));
+                    clienteView.recebeCPF(c);
+                }
             }
+            if (usuarioAbstrato instanceof Adm) {
+                if (controller.checkLogin(this.txtEmail.getText(), Integer.parseInt(new String(txtSenha.getPassword())))) {
+                    this.EntrarAdm();
+                }
+            }
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
             this.Erro();
@@ -161,6 +176,12 @@ public class Login extends javax.swing.JFrame {
     public void Entrar() {
         ClienteView cliente = new ClienteView();
         cliente.setVisible(true);
+        this.dispose();
+    }
+
+    public void EntrarAdm() {
+        AdmView admView = new AdmView();
+        admView.setVisible(true);
         this.dispose();
     }
 

@@ -27,7 +27,7 @@ public class EditarPerfil extends javax.swing.JFrame {
      */
     public EditarPerfil() {
         initComponents();
-
+        this.setDefaultCloseOperation(0);
     }
 
     public String getNome() {
