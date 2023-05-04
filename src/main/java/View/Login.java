@@ -162,12 +162,10 @@ public class Login extends javax.swing.JFrame {
                     this.EntrarAdm();
                 }
             }
-
         } catch (Exception e) {
             System.out.println(e.getMessage());
             this.Erro();
         }
-
     }//GEN-LAST:event_jButton1ActionPerformed
     public int RecebeCpf() {
         return Integer.parseInt(new String(txtSenha.getPassword()));

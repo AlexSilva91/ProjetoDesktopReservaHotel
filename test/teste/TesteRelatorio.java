@@ -10,7 +10,7 @@ import main.java.Controller.ClienteController;
 import main.java.Controller.ReservaController;
 import main.java.model.Cliente;
 import main.java.model.Reserva;
-import main.java.resources.relatorio.RelatorioPDF;
+import main.java.resources.relatorio.RelatorioReserva;
 
 /**
  *
@@ -25,7 +25,7 @@ public class TesteRelatorio {
 
         List<Reserva> rs = controller.listAll(123);
 
-        RelatorioPDF dF = new RelatorioPDF(cliente, "relatorio.pdf");
+        RelatorioReserva dF = new RelatorioReserva(cliente, "relatorio.pdf");
         dF.gerarCabecalho();
         dF.gerarCorpo(rs);
         dF.gerarRodape();

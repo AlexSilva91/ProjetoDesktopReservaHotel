@@ -26,20 +26,20 @@ import main.java.resources.conversor.Conversor;
  *
  * @author HP - 4300
  */
-public class RelatorioPDF implements Relatorios {
+public class RelatorioReserva implements Relatorios {
 
     private Cliente cliente;
     private Document document;
     private String caminhoRelatorio = "C:\\Users\\HP - 4300\\Documents\\Relatorios\\";
 
-    public RelatorioPDF(Cliente cliente, String nome) {
+    public RelatorioReserva(Cliente cliente, String nome) {
         this.cliente = cliente;
         this.document = new Document(PageSize.A4, 50, 50, 70, 70);
         try {
             PdfWriter.getInstance(document, new FileOutputStream(caminhoRelatorio + nome));
             this.document.open();
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(RelatorioPDF.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RelatorioReserva.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
