@@ -5,6 +5,7 @@
  */
 package main.java.Controller;
 
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.swing.JOptionPane;
 import main.java.ConnectionFactory.ConnectionFactory;
@@ -106,6 +107,10 @@ public class ClienteController {
         } catch (Exception e) {
             this.deletarPerfil.Erro(e);
         }
+    }
+
+    public List<Cliente> ConsultCliente() {
+        return clienteDao.ConsultCliente();
     }
 
     public int getCpf() {

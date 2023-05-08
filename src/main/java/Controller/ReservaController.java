@@ -49,10 +49,15 @@ public class ReservaController {
         }
     }
 
+    public List<Reserva> ConsultaReserva() {
+        return reservaDao.ConsultaReserva();
+    }
+
     public Reserva Busca(int id) {
         return reservaDao.findById(id);
     }
-    public Reserva BuscaQuarto(int cod){
+
+    public Reserva BuscaQuarto(int cod) {
         try {
             reserva = reservaDao.BuscaQuarto(cod);
         } catch (Exception e) {
