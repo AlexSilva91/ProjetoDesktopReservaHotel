@@ -134,7 +134,7 @@ public class DeletarPerfil extends javax.swing.JFrame {
 		if (JOptionPane.showConfirmDialog(this, "Deseja realmente cancelar?", "Confirmação", JOptionPane.YES_NO_OPTION,
 				JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
 			ClienteController clienteController = new ClienteController();
-			//clienteController.deletaCliente(Integer.parseInt(txtCPF.getText()));
+			// clienteController.deletaCliente(Integer.parseInt(txtCPF.getText()));
 			clienteController.deletaClienteList(Integer.parseInt(txtCPF.getText()));
 		}
 	}// GEN-LAST:event_jButton1ActionPerformed

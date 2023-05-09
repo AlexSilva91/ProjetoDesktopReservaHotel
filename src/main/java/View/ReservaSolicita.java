@@ -212,7 +212,8 @@ public class ReservaSolicita extends javax.swing.JFrame {
 			g.gerarCodigo();
 			r.setQuarto(g.getCodigo());
 			r.setValorDiaria(40);
-			r.setCpf_cliente(cliente.getCpf());;
+			r.setCpf_cliente(cliente.getCpf());
+
 			try {
 				reservaController.CadastraReserva(r);
 				this.dispose();

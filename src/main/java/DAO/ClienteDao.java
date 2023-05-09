@@ -5,6 +5,7 @@
  */
 package main.java.DAO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -33,10 +34,10 @@ public class ClienteDao {
 
 	}
 
-	public List<Cliente> ConsultCliente() {
+	public ArrayList<Cliente> ConsultCliente() {
 		String jpql = "from Cliente c";
 		Query q = em.createQuery(jpql, Cliente.class);
-		List<Cliente> list = q.getResultList();
+		ArrayList<Cliente> list = (ArrayList<Cliente>) q.getResultList();
 		return list;
 	}
 

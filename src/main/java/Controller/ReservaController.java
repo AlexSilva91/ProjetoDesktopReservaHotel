@@ -60,7 +60,6 @@ public class ReservaController {
 		}
 	}
 
-
 	public List<Reserva> ConsultaReserva() {
 		return reservaDao.ConsultaReserva();
 	}

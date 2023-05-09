@@ -9,14 +9,11 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 /**
  *
@@ -121,5 +118,5 @@ public class Reserva implements Serializable {
 	public void setCpf_cliente(int cpf_cliente) {
 		this.cpf_cliente = cpf_cliente;
 	}
-	
+
 }

@@ -5,6 +5,7 @@
  */
 package main.java.DAO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -27,10 +28,10 @@ public class ReservaDao {
 		this.em.getTransaction().commit();
 	}
 
-	public List<Reserva> ConsultaReserva() {
+	public ArrayList<Reserva> ConsultaReserva() {
 		String jpql = "FROM Reserva r";
 		Query q = em.createQuery(jpql, Reserva.class);
-		List<Reserva> list = q.getResultList();
+		ArrayList<Reserva> list = (ArrayList<Reserva>) q.getResultList();
 		return list;
 	}
 
@@ -48,10 +49,10 @@ public class ReservaDao {
 		return r;
 	}
 
-	public List<Reserva> Resevas(int id) {
+	public ArrayList<Reserva> Resevas(int id) {
 		Query q = em.createQuery("SELECT r FROM Reserva as r where r.cpf_cliente =:id", Reserva.class)
 				.setParameter("id", id);
-		List<Reserva> r = q.getResultList();
+		ArrayList<Reserva> r = (ArrayList<Reserva>) q.getResultList();
 		return r;
 	}
 

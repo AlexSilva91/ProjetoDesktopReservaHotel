@@ -33,7 +33,7 @@ public class ClienteController {
 	private final EditarPerfil editarPerfil = new EditarPerfil();
 	private final ClienteView clienteView = new ClienteView();
 	private final DeletarPerfil deletarPerfil = new DeletarPerfil();
-	private static List<Reserva> r = new ArrayList<>();
+	private static ArrayList<Reserva> r = new ArrayList<Reserva>();
 	private static int cpf;
 
 	public void CadastrarCliente(Cliente c) {
@@ -112,28 +112,28 @@ public class ClienteController {
 	}
 
 	public void deletaClienteList(int cpf) {
-		//cliente = Consulta(cpf);
+		// cliente = Consulta(cpf);
 		r = ConsultClienteList(cpf);
 		try {
-			for (int i = 0; i < r.size(); i++) {
-				if (r.get(i) != null) {
-					reservaDao.removeReserva(r.get(i).getId());
+			for (Reserva element : r) {
+				if (element != null) {
+					reservaDao.removeReserva(element.getId());
 				}
 				this.clienteDao.removeCliente(cliente.getCpf());
 				this.deletarPerfil.Exibe();
 				this.deletarPerfil.fecha();
 			}
-			
+
 		} catch (Exception e) {
 			this.deletarPerfil.Erro();
 		}
 	}
 
-	public List<Cliente> ConsultCliente() {
+	public ArrayList<Cliente> ConsultCliente() {
 		return clienteDao.ConsultCliente();
 	}
 
-	public List<Reserva> ConsultClienteList(int cpf) {
+	public ArrayList<Reserva> ConsultClienteList(int cpf) {
 		return reservaDao.Resevas(cpf);
 	}
 

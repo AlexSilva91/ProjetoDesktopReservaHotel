@@ -7,7 +7,6 @@ package main.java.View;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -25,8 +24,8 @@ import main.java.resources.relatorio.RelatorioReservaEspecifica;
  */
 public class ListarReservas extends javax.swing.JFrame {
 
-	private static List<Reserva> listClienteReserva = new ArrayList<>();
-	private static List<Cliente> listCliente = new ArrayList<>();
+	private static ArrayList<Reserva> listClienteReserva = new ArrayList<>();
+	private static ArrayList<Cliente> listCliente = new ArrayList<>();
 	private final ReservaController reservaController = new ReservaController();
 	private final ClienteController clienteController = new ClienteController();
 	private Reserva reserva = new Reserva();
@@ -129,6 +128,7 @@ public class ListarReservas extends javax.swing.JFrame {
 				new String[] { "CPF_Cliente", "Inicio", "Final", "Hora", "Quarto", "Status", "Valor" }) {
 			boolean[] columnEditables = new boolean[] { false, true, true, true, true, true, true };
 
+			@Override
 			public boolean isCellEditable(int row, int column) {
 				return columnEditables[column];
 			}
@@ -190,11 +190,16 @@ public class ListarReservas extends javax.swing.JFrame {
 	}// GEN-LAST:event_jButton2ActionPerformed
 
 	private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton3ActionPerformed
-		if (tabelaReservaCliente.getSelectedRowCount() > 0) {
+
+		if (tabelaReservaCliente.getSelectedRowCount() == 1) {
 			int indice = tabelaReservaCliente.getSelectedRow();
 			try {
+				
 				reserva = listClienteReserva.get(indice);
-				cliente = listCliente.get(indice);
+				cliente = clienteController.Consulta(reserva.getCpf_cliente());
+
+				System.out.println(listCliente.size());
+				System.out.println(listClienteReserva.size());
 				LocalTime time = LocalTime.now();
 				String nome = "Reserva " + cliente.getNome() + " " + time.getSecond() + ".pdf";
 				RelatorioReservaEspecifica reservaEspecifica = new RelatorioReservaEspecifica(cliente, nome);
@@ -205,7 +210,7 @@ public class ListarReservas extends javax.swing.JFrame {
 				JOptionPane.showMessageDialog(this, "Relatorio gerado!", "Salvo", JOptionPane.INFORMATION_MESSAGE);
 				this.dispose();
 			} catch (Exception e) {
-				System.out.println(e.getMessage());
+				System.out.println(e.getCause());
 			}
 		}
 	}// GEN-LAST:event_jButton3ActionPerformed
@@ -213,8 +218,8 @@ public class ListarReservas extends javax.swing.JFrame {
 	private void preecherTabela() {
 		Reserva reserva = null;
 		listClienteReserva.clear();
-		listClienteReserva = reservaController.ConsultaReserva();
-		listCliente = clienteController.ConsultCliente();
+		listClienteReserva = (ArrayList<Reserva>) reservaController.ConsultaReserva();
+		listCliente = (ArrayList<Cliente>) clienteController.ConsultCliente();
 		DefaultTableModel model = (DefaultTableModel) tabelaReservaCliente.getModel();
 		model.setRowCount(0);
 		for (Reserva element : listClienteReserva) {
@@ -222,7 +227,6 @@ public class ListarReservas extends javax.swing.JFrame {
 					Conversor.conversorData(element.getDataFinal()), element.getHoraEntrada(), element.getQuarto(),
 					element.getStatus(), element.getValorDiaria() });
 		}
-
 	}
 
 	/**

@@ -150,20 +150,15 @@ public class Login extends javax.swing.JFrame {
 
 					c = clienteController.Consulta(Integer.parseInt(new String(txtSenha.getPassword())));
 					clienteView.recebeCPF(c);
-				} else {
-					this.Erro();
 				}
 			}
 			if (usuarioAbstrato instanceof Adm) {
 				if (controller.checkLogin(this.txtEmail.getText(),
 						Integer.parseInt(new String(txtSenha.getPassword())))) {
 					this.EntrarAdm();
-				} else {
-					this.Erro();
 				}
 			}
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
 			this.Erro();
 		}
 	}// GEN-LAST:event_jButton1ActionPerformed
