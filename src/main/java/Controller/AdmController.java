@@ -14,9 +14,9 @@ import main.java.model.Adm;
  */
 public class AdmController {
 
-    private final AdmDao admDao = new AdmDao();
+	private final AdmDao admDao = new AdmDao();
 
-    public Adm busca(int id) {
-        return admDao.findById(id);
-    }
+	public Adm busca(int id) {
+		return admDao.findById(id);
+	}
 }

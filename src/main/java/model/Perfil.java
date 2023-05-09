@@ -11,15 +11,15 @@ package main.java.model;
  */
 public class Perfil {
 
-    private static int cpf;
+	private static int cpf;
 
-    public static int getCpf() {
-        return cpf;
+	public static int getCpf() {
+		return cpf;
 
-    }
+	}
 
-    public static void setCpf(int cpf) {
-        Perfil.cpf = cpf;
-    }
+	public static void setCpf(int cpf) {
+		Perfil.cpf = cpf;
+	}
 
 }

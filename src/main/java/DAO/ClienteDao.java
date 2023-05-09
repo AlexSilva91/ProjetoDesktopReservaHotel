@@ -6,8 +6,10 @@
 package main.java.DAO;
 
 import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+
 import main.java.ConnectionFactory.ConnectionFactory;
 import main.java.model.Cliente;
 
@@ -17,43 +19,43 @@ import main.java.model.Cliente;
  */
 public class ClienteDao {
 
-    private final EntityManager em = ConnectionFactory.getConnection();
+	private final EntityManager em = ConnectionFactory.getConnection();
 
-    public void SaveCliente(Cliente cliente) {
-        try {
-            this.em.getTransaction().begin();
-            this.em.persist(cliente);
-            this.em.getTransaction().commit();
-        } catch (Exception e) {
-            this.em.getTransaction().rollback();
-            e.getMessage();
-        }
+	public void SaveCliente(Cliente cliente) {
+		try {
+			this.em.getTransaction().begin();
+			this.em.persist(cliente);
+			this.em.getTransaction().commit();
+		} catch (Exception e) {
+			this.em.getTransaction().rollback();
+			e.getMessage();
+		}
 
-    }
+	}
 
-    public List<Cliente> ConsultCliente() {
-        String jpql = "from Cliente c";
-        Query q = em.createQuery(jpql, Cliente.class);
-        List<Cliente> list = q.getResultList();
-        return list;
-    }
+	public List<Cliente> ConsultCliente() {
+		String jpql = "from Cliente c";
+		Query q = em.createQuery(jpql, Cliente.class);
+		List<Cliente> list = q.getResultList();
+		return list;
+	}
 
-    public Cliente findById(int id) {
-        return this.em.find(Cliente.class, id);
-    }
+	public Cliente findById(int id) {
+		return this.em.find(Cliente.class, id);
+	}
 
-    public void removeCliente(int cliente_id) {
-        Cliente cliente = this.em.getReference(Cliente.class, cliente_id);
-        this.em.getTransaction().begin();
-        cliente = this.em.merge(cliente);
-        this.em.remove(cliente);
-        this.em.getTransaction().commit();
-    }
+	public void removeCliente(int cliente_id) {
+		Cliente cliente = this.em.getReference(Cliente.class, cliente_id);
+		this.em.getTransaction().begin();
+		cliente = this.em.merge(cliente);
+		this.em.remove(cliente);
+		this.em.getTransaction().commit();
+	}
 
-    public void AtualizaCliente(Cliente cliente) {
-        this.em.getTransaction().begin();
-        this.em.merge(cliente);
-        this.em.getTransaction().commit();
+	public void AtualizaCliente(Cliente cliente) {
+		this.em.getTransaction().begin();
+		this.em.merge(cliente);
+		this.em.getTransaction().commit();
 
-    }
+	}
 }

@@ -6,6 +6,7 @@
 package main.java.resources.gerador;
 
 import java.util.Random;
+
 import main.java.Controller.ReservaController;
 import main.java.model.Reserva;
 
@@ -15,34 +16,34 @@ import main.java.model.Reserva;
  */
 public class Gerador {
 
-    private final int MAX = 100;
-    private final Random cod = new Random();
-    private static int codigo;
-    private ReservaController controller;
+	private final int MAX = 100;
+	private final Random cod = new Random();
+	private static int codigo;
+	private ReservaController controller;
 
-    public int getCodigo() {
-        return codigo;
-    }
+	public int getCodigo() {
+		return codigo;
+	}
 
-    public void setCodigo(int codigo) {
-        Gerador.codigo = codigo;
-    }
+	public void setCodigo(int codigo) {
+		Gerador.codigo = codigo;
+	}
 
-    public void gerarCodigo() {
-        Gerador.codigo = this.cod.nextInt(MAX);
-    }
+	public void gerarCodigo() {
+		Gerador.codigo = this.cod.nextInt(MAX);
+	}
 
-    public boolean ValidaCod(int cod) {
-        boolean valido = false;
-        Reserva reserva;
-        try {
-            reserva = controller.BuscaQuarto(cod);
-            if (cod != reserva.getQuarto() && cod > 0) {
-                valido = true;
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        return valido;
-    }
+	public boolean ValidaCod(int cod) {
+		boolean valido = false;
+		Reserva reserva;
+		try {
+			reserva = controller.BuscaQuarto(cod);
+			if (cod != reserva.getQuarto() && cod > 0) {
+				valido = true;
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return valido;
+	}
 }

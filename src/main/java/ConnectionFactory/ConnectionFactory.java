@@ -5,7 +5,9 @@
  */
 package main.java.ConnectionFactory;
 
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -13,11 +15,10 @@ import javax.persistence.*;
  */
 public class ConnectionFactory {
 
-    private static final EntityManagerFactory emf
-            = Persistence.createEntityManagerFactory("hospedagemPU");
+	private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("hospedagemPU");
 
-    public static EntityManager getConnection() {
-        return emf.createEntityManager();
-    }
+	public static EntityManager getConnection() {
+		return emf.createEntityManager();
+	}
 
 }

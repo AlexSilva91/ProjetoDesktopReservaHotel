@@ -6,6 +6,7 @@
 package main.java.DAO;
 
 import javax.persistence.EntityManager;
+
 import main.java.ConnectionFactory.ConnectionFactory;
 import main.java.model.Adm;
 
@@ -15,21 +16,22 @@ import main.java.model.Adm;
  */
 public class AdmDao {
 
-    private final EntityManager em = ConnectionFactory.getConnection();
+	private final EntityManager em = ConnectionFactory.getConnection();
 
-    public void SaveUser(Adm adm) {
-        this.em.getTransaction().begin();
-        try {
-            this.em.persist(adm);
-            this.em.getTransaction().commit();
-        } catch (Exception e) {
-            this.em.getTransaction().rollback();
-        }
-        this.em.close();
+	public void SaveUser(Adm adm) {
+		this.em.getTransaction().begin();
+		try {
+			this.em.persist(adm);
+			this.em.getTransaction().commit();
+		} catch (Exception e) {
+			this.em.getTransaction().rollback();
+		}
+		this.em.close();
 
-    }
-   public Adm findById(int id) {
-        return this.em.find(Adm.class, id);
-    }
+	}
+
+	public Adm findById(int id) {
+		return this.em.find(Adm.class, id);
+	}
 
 }

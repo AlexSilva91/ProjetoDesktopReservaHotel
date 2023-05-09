@@ -6,6 +6,7 @@
 package main.java.model;
 
 import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,98 +21,79 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Cliente extends UsuarioAbstrato implements Serializable {
 
-    @Id
-    @Column
-    private int cpf;
-    @Column
-    private String nome;
-    @Column
-    private String email;
-    @Column
-    private String telefone;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn
-    private Reserva reserva;
+	private static final long serialVersionUID = 1L;
+	@Id
+	@Column
+	private int cpf;
+	@Column
+	private String nome;
+	@Column
+	private String email;
+	@Column
+	private String telefone;
 
-    public Cliente(String nome, String email, String telefone) {
-        this.nome = nome;
-        this.email = email;
-        this.telefone = telefone;
-    }
+	public Cliente(String nome, String email, String telefone) {
+		this.nome = nome;
+		this.email = email;
+		this.telefone = telefone;
+	}
 
-    public Cliente(int cpf, String nome, String email, String telefone) {
-        this.cpf = cpf;
-        this.nome = nome;
-        this.email = email;
-        this.telefone = telefone;
-    }
+	public Cliente(int cpf, String nome, String email, String telefone) {
+		this.cpf = cpf;
+		this.nome = nome;
+		this.email = email;
+		this.telefone = telefone;
+	}
 
-    public Cliente(int cpf, String nome, String email, String telefone, Reserva reserva) {
-        this.cpf = cpf;
-        this.nome = nome;
-        this.email = email;
-        this.telefone = telefone;
-        this.reserva = reserva;
-    }
-    
-    public Cliente() {
+	public Cliente(int cpf, String nome, String email, String telefone, Reserva reserva) {
+		this.cpf = cpf;
+		this.nome = nome;
+		this.email = email;
+		this.telefone = telefone;
+	}
 
-    }
+	public Cliente() {
 
-    /**
-     *
-     * @return
-     */
-    public Reserva getReserva() {
-        return reserva;
-    }
+	}
 
-    /**
-     *
-     * @param reserva
-     */
-    public void setReserva(Reserva reserva) {
-        this.reserva = reserva;
-    }
+	@Override
+	public String getNome() {
+		return nome;
+	}
 
-    @Override
-    public String getNome() {
-        return nome;
-    }
+	@Override
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
-    @Override
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	@Override
+	public String getEmail() {
+		return email;
+	}
 
-    @Override
-    public String getEmail() {
-        return email;
-    }
+	@Override
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    @Override
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	@Override
+	public String getTelefone() {
+		return telefone;
+	}
 
-    @Override
-    public String getTelefone() {
-        return telefone;
-    }
+	@Override
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
 
-    @Override
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
+	@Override
+	public int getCpf() {
+		return cpf;
+	}
 
-    @Override
-    public int getCpf() {
-        return cpf;
-    }
-
-    @Override
-    public void setCpf(int cpf) {
-        this.cpf = cpf;
-    }
+	@Override
+	public void setCpf(int cpf) {
+		this.cpf = cpf;
+	}
 
 }
