@@ -97,7 +97,7 @@ public class RelatorioReservaEspecifica implements Relatorios {
 		paragraphCorpo.setAlignment(Element.ALIGN_JUSTIFIED);
 
 		paragraphCorpo.add(new Chunk("Data de entrada: " + Conversor.conversorData(r.getDataInicial())
-				+ "\nData de saída: " + Conversor.conversorData(r.getDataInicial()) + "\nHora de entrada: "
+				+ "\nData de saída: " + Conversor.conversorData(r.getDataFinal()) + "\nHora de entrada: "
 				+ r.getHoraEntrada() + "\nStatus: " + r.getStatus() + "\nQuarto: " + r.getQuarto()
 				+ "\nValor da diária: " + r.getValorDiaria() + "\n\n", new Font(Font.TIMES_ROMAN, 12)));
 

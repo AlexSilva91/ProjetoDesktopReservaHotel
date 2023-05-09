@@ -125,14 +125,12 @@ public class ListarReservas extends javax.swing.JFrame {
 						.addGap(18, 18, 18).addComponent(jButton2).addGap(18, 18, 18).addComponent(jButton3)
 						.addGap(18, 18, 18).addComponent(jButton4).addContainerGap(31, Short.MAX_VALUE)));
 
-		tabelaReservaCliente.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
+		tabelaReservaCliente.setModel(new DefaultTableModel(new Object[][] {},
+				new String[] { "CPF_Cliente", "Inicio", "Final", "Hora", "Quarto", "Status", "Valor" }) {
+			boolean[] columnEditables = new boolean[] { false, true, true, true, true, true, true };
 
-		}, new String[] { "Cliente", "Inicio", "Final", "Hora", "Quarto", "Status", "Valor" }) {
-			boolean[] canEdit = new boolean[] { false, false, false, false, false, false, false };
-
-			@Override
-			public boolean isCellEditable(int rowIndex, int columnIndex) {
-				return canEdit[columnIndex];
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
 			}
 		});
 		jTable.setViewportView(tabelaReservaCliente);
@@ -192,14 +190,14 @@ public class ListarReservas extends javax.swing.JFrame {
 	}// GEN-LAST:event_jButton2ActionPerformed
 
 	private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton3ActionPerformed
-		if (tabelaReservaCliente.getSelectedRowCount() == 1) {
+		if (tabelaReservaCliente.getSelectedRowCount() > 0) {
 			int indice = tabelaReservaCliente.getSelectedRow();
-			reserva = listClienteReserva.get(indice);
-			cliente = listCliente.get(indice);
-			LocalTime time = LocalTime.now();
-			String nome = "Reserva " + cliente.getNome() + " " + time.getSecond() + ".pdf";
-			RelatorioReservaEspecifica reservaEspecifica = new RelatorioReservaEspecifica(cliente, nome);
 			try {
+				reserva = listClienteReserva.get(indice);
+				cliente = listCliente.get(indice);
+				LocalTime time = LocalTime.now();
+				String nome = "Reserva " + cliente.getNome() + " " + time.getSecond() + ".pdf";
+				RelatorioReservaEspecifica reservaEspecifica = new RelatorioReservaEspecifica(cliente, nome);
 				reservaEspecifica.gerarCabecalho();
 				reservaEspecifica.gerarCorpo(reserva);
 				reservaEspecifica.gerarRodape();
@@ -213,19 +211,18 @@ public class ListarReservas extends javax.swing.JFrame {
 	}// GEN-LAST:event_jButton3ActionPerformed
 
 	private void preecherTabela() {
+		Reserva reserva = null;
+		listClienteReserva.clear();
 		listClienteReserva = reservaController.ConsultaReserva();
 		listCliente = clienteController.ConsultCliente();
 		DefaultTableModel model = (DefaultTableModel) tabelaReservaCliente.getModel();
-		          model.setRowCount(0);
+		model.setRowCount(0);
 		for (Reserva element : listClienteReserva) {
-			for(Cliente c : listCliente) {
-			model.addRow(new Object[] { c.getNome(),
-					Conversor.conversorData(element.getDataInicial()),
-					Conversor.conversorData(element.getDataFinal()),
-					element.getHoraEntrada(), element.getQuarto(),
+			model.addRow(new Object[] { element.getCpf_cliente(), Conversor.conversorData(element.getDataInicial()),
+					Conversor.conversorData(element.getDataFinal()), element.getHoraEntrada(), element.getQuarto(),
 					element.getStatus(), element.getValorDiaria() });
 		}
-		}
+
 	}
 
 	/**

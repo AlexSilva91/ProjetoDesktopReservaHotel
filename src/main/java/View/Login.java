@@ -138,7 +138,7 @@ public class Login extends javax.swing.JFrame {
 	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
 		ClienteView clienteView = new ClienteView();
 		UsuarioAbstrato usuarioAbstrato;
-		
+
 		try {
 			usuarioAbstrato = controller.checaInstancia(RecebeCpf());
 
@@ -150,12 +150,16 @@ public class Login extends javax.swing.JFrame {
 
 					c = clienteController.Consulta(Integer.parseInt(new String(txtSenha.getPassword())));
 					clienteView.recebeCPF(c);
+				} else {
+					this.Erro();
 				}
 			}
 			if (usuarioAbstrato instanceof Adm) {
 				if (controller.checkLogin(this.txtEmail.getText(),
 						Integer.parseInt(new String(txtSenha.getPassword())))) {
 					this.EntrarAdm();
+				} else {
+					this.Erro();
 				}
 			}
 		} catch (Exception e) {
