@@ -215,10 +215,10 @@ public class ClienteView extends javax.swing.JFrame {
 
 	private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItem5ActionPerformed
 		exibe();
-		MinhasReservas mr = new MinhasReservas();
-		mr.setVisible(true);
-		mr.RecebeCliente(cliente);
-		mr.preecherTabela();
+		MinhasReserv minhasReserv = new MinhasReserv();
+		minhasReserv.setVisible(true);
+		minhasReserv.RecebeCliente(cliente);
+		minhasReserv.preecherTabela();
 	}// GEN-LAST:event_jMenuItem5ActionPerformed
 
 	private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItem6ActionPerformed

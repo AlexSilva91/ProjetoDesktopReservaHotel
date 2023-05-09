@@ -216,7 +216,7 @@ public class ListarReservas extends javax.swing.JFrame {
 		listClienteReserva = reservaController.ConsultaReserva();
 		listCliente = clienteController.ConsultCliente();
 		DefaultTableModel model = (DefaultTableModel) tabelaReservaCliente.getModel();
-		model.setRowCount(0);
+		          model.setRowCount(0);
 		for (Reserva element : listClienteReserva) {
 			for(Cliente c : listCliente) {
 			model.addRow(new Object[] { c.getNome(),
