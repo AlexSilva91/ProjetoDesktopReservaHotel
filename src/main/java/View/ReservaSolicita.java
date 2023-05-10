@@ -6,6 +6,7 @@
 package main.java.View;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
 import javax.swing.JOptionPane;
@@ -204,6 +205,7 @@ public class ReservaSolicita extends javax.swing.JFrame {
 			dataInicialMenorQueAtual = true;
 
 		}
+
 		if (dataInicialMaiorOuigualFinal && dataMaiorOuIgualAtual && !dataInicialMenorQueAtual) {
 			r.setDataInicial(Conversor.ConversorData(txtDataInicio.getText()));
 			r.setDataFinal(Conversor.ConversorData(txtDataFim.getText()));

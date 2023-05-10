@@ -5,6 +5,7 @@
 package main.java.View;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -215,16 +216,18 @@ public class MinhasReserv extends javax.swing.JFrame {
 		if (tabelaReserva.getSelectedRowCount() == 1) {
 			int indice = tabelaReserva.getSelectedRow();
 			Reserva reserva = listaReserva.get(indice);
-			if (("cancelada").equals(reserva.getStatus()) || ("recusada").equals(reserva.getStatus()) || ("aprovada").equals(reserva.getStatus())) {
-				
+			if (("cancelada").equals(reserva.getStatus()) || ("recusada").equals(reserva.getStatus())
+					|| ("aprovada").equals(reserva.getStatus())) {
+
 				JOptionPane.showMessageDialog(this, "Opção inválida!", "Erro!", JOptionPane.ERROR_MESSAGE);
-				
+
 			} else {
 				boolean dataMaiorOuIgualAtual = false;
 				boolean dataInicialMaiorOuigualFinal = false;
 				boolean dataInicialMenorQueAtual = false;
 				LocalDate inicial = Conversor.ConversorData(txtChegada.getText());
 				LocalDate fim = Conversor.ConversorData(txtSaida.getText());
+
 				if (Conversor.DataInicioMaiorQueAtual(inicial) || Conversor.DataInicioIgualAtual(inicial)) {
 					dataMaiorOuIgualAtual = true;
 				}
@@ -254,10 +257,11 @@ public class MinhasReserv extends javax.swing.JFrame {
 			if (tabelaReserva.getSelectedRowCount() == 1) {
 				int indice = tabelaReserva.getSelectedRow();
 				Reserva reserva = listaReserva.get(indice);
-				if (("cancelada").equals(reserva.getStatus()) || ("recusada").equals(reserva.getStatus()) || ("aprovada").equals(reserva.getStatus())) {
-					
+				if (("cancelada").equals(reserva.getStatus()) || ("recusada").equals(reserva.getStatus())
+						|| ("aprovada").equals(reserva.getStatus())) {
+
 					JOptionPane.showMessageDialog(this, "Opção inválida!", "Erro!", JOptionPane.ERROR_MESSAGE);
-					
+
 				} else {
 					reserva.setStatus("cancelada");
 					reserva.setCpf_cliente(cliente.getCpf());
