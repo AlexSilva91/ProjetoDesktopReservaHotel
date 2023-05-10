@@ -161,7 +161,7 @@ public class ListarReservas extends javax.swing.JFrame {
 			reserva = listClienteReserva.get(indice);
 			if (("cancelada").equals(reserva.getStatus()) || ("recusada").equals(reserva.getStatus())
 					|| ("aprovada").equals(reserva.getStatus())) {
-				JOptionPane.showMessageDialog(this, "Opção inválida!", "Erro", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "Opção inválida!", "Erro!", JOptionPane.ERROR_MESSAGE);
 			} else {
 				reserva.setStatus("aprovada");
 				reservaController.AtualizarReserva(reserva);
@@ -180,7 +180,7 @@ public class ListarReservas extends javax.swing.JFrame {
 			reserva = listClienteReserva.get(indice);
 			if (("cancelada").equals(reserva.getStatus()) || ("recusada").equals(reserva.getStatus())
 					|| ("aprovada").equals(reserva.getStatus())) {
-				JOptionPane.showMessageDialog(this, "Opção inválida!", "Erro", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "Opção inválida!", "Erro!", JOptionPane.ERROR_MESSAGE);
 			} else {
 				reserva.setStatus("recusada");
 				reservaController.AtualizarReserva(reserva);

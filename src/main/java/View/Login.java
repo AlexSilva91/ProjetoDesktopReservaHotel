@@ -136,35 +136,55 @@ public class Login extends javax.swing.JFrame {
 	}// </editor-fold>//GEN-END:initComponents
 
 	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
+
 		ClienteView clienteView = new ClienteView();
 		UsuarioAbstrato usuarioAbstrato;
+		boolean cliente = false;
+		boolean adm = false;
 
 		try {
 			usuarioAbstrato = controller.checaInstancia(RecebeCpf());
-
 			if (usuarioAbstrato instanceof Cliente) {
 				if (controller.checkLogin(this.txtEmail.getText(),
 						Integer.parseInt(new String(txtSenha.getPassword())))) {
-
-					this.Entrar();
-
-					c = clienteController.Consulta(Integer.parseInt(new String(txtSenha.getPassword())));
-					clienteView.recebeCPF(c);
+					cliente = true;
 				}
 			}
 			if (usuarioAbstrato instanceof Adm) {
 				if (controller.checkLogin(this.txtEmail.getText(),
 						Integer.parseInt(new String(txtSenha.getPassword())))) {
-					this.EntrarAdm();
+					adm = true;
 				}
+			}
+			if (adm) {
+
+				this.EntrarAdm();
+
+			} else if (cliente) {
+				
+				this.Entrar();
+				c = clienteController.Consulta(Integer.parseInt(new String(txtSenha.getPassword())));
+				clienteView.recebeCPF(c);
+				
+			}else{
+				this.Erro();
 			}
 		} catch (Exception e) {
 			this.Erro();
 		}
+
 	}// GEN-LAST:event_jButton1ActionPerformed
 
 	public int RecebeCpf() {
 		return Integer.parseInt(new String(txtSenha.getPassword()));
+	}
+
+	public int PasssWord() {
+		return Integer.parseInt(new String(txtSenha.getPassword()));
+	}
+
+	public String Email() {
+		return new String(txtEmail.getSelectedText());
 	}
 
 	public void Entrar() {
@@ -180,7 +200,11 @@ public class Login extends javax.swing.JFrame {
 	}
 
 	public void Erro() {
-		JOptionPane.showMessageDialog(null, "Login ou senha inválidos!");
+		JOptionPane.showMessageDialog(this, "Login ou senha inválidos!", "Erro!", JOptionPane.ERROR_MESSAGE);
+	}
+
+	public void FecharTelaLogin() {
+		this.dispose();
 	}
 
 	private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton2ActionPerformed

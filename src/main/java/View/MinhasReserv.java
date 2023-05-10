@@ -215,9 +215,10 @@ public class MinhasReserv extends javax.swing.JFrame {
 		if (tabelaReserva.getSelectedRowCount() == 1) {
 			int indice = tabelaReserva.getSelectedRow();
 			Reserva reserva = listaReserva.get(indice);
-			if (("cancelada").equals(reserva.getStatus()) || ("recusada").equals(reserva.getStatus())
-					|| ("aprovada").equals(reserva.getStatus())) {
-				JOptionPane.showMessageDialog(rootPane, "Opção inválida!");
+			if (("cancelada").equals(reserva.getStatus()) || ("recusada").equals(reserva.getStatus()) || ("aprovada").equals(reserva.getStatus())) {
+				
+				JOptionPane.showMessageDialog(this, "Opção inválida!", "Erro!", JOptionPane.ERROR_MESSAGE);
+				
 			} else {
 				boolean dataMaiorOuIgualAtual = false;
 				boolean dataInicialMaiorOuigualFinal = false;
@@ -241,7 +242,7 @@ public class MinhasReserv extends javax.swing.JFrame {
 					reservaController.AtualizarReserva(reserva);
 					preecherTabela();
 				} else {
-					JOptionPane.showMessageDialog(this, "Data inválida!", "Erro", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(this, "Opção inválida!", "Erro!", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		}
@@ -253,9 +254,10 @@ public class MinhasReserv extends javax.swing.JFrame {
 			if (tabelaReserva.getSelectedRowCount() == 1) {
 				int indice = tabelaReserva.getSelectedRow();
 				Reserva reserva = listaReserva.get(indice);
-				if (("cancelada").equals(reserva.getStatus()) || ("recusada").equals(reserva.getStatus())
-						|| ("aprovada").equals(reserva.getStatus())) {
-					JOptionPane.showMessageDialog(rootPane, "Opção inválida!");
+				if (("cancelada").equals(reserva.getStatus()) || ("recusada").equals(reserva.getStatus()) || ("aprovada").equals(reserva.getStatus())) {
+					
+					JOptionPane.showMessageDialog(this, "Opção inválida!", "Erro!", JOptionPane.ERROR_MESSAGE);
+					
 				} else {
 					reserva.setStatus("cancelada");
 					reserva.setCpf_cliente(cliente.getCpf());

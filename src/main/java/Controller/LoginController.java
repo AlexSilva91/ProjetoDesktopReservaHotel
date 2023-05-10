@@ -5,13 +5,8 @@
  */
 package main.java.Controller;
 
-import javax.swing.JOptionPane;
-
 import main.java.DAO.AdmDao;
 import main.java.DAO.ClienteDao;
-import main.java.View.AdmView;
-import main.java.View.ClienteView;
-import main.java.View.Login;
 import main.java.model.Adm;
 import main.java.model.Cliente;
 import main.java.model.UsuarioAbstrato;
